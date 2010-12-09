@@ -1,0 +1,118 @@
+/**
+ * p12t PHP Framework : /app/www/css/p12t.css
+ *
+ * @package p12t
+ * @author hepper
+ * @copyright Copyright (c) 2010, Henrik Persson, Pay if you like it
+ * @license http://opensource.org/licenses/mit-license.php MIT License
+ */
+
+body {
+    font-size: 62.5%;
+    font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    background: #fff;
+}
+
+p {
+    margin: 0 0 1.5em 0;
+}
+
+/* Headings
+-------------------------------------------------------------- */
+
+h1,h2,h3,h4,h5,h6 { font-weight: normal; color: #996600; }
+
+h1 { font-size: 3em; margin-bottom: 0.5em; }
+h2 { font-size: 2em; margin-bottom: 0.75em; }
+h3 { font-size: 1.5em; margin-bottom: 1em; }
+h4 { font-size: 1.2em; margin-bottom: 1.25em; }
+h5 { font-size: 1em; font-weight: bold; margin-bottom: 1.5em; }
+h6 { font-size: 1em; font-weight: bold; }
+
+h1 img, h2 img, h3 img,
+h4 img, h5 img, h6 img {
+  margin: 0;
+}
+
+#page-container {
+    font-size: 1.4em;
+    width: 950px;
+    margin: 0 auto;
+}
+
+#main-container {
+    width: 100%;
+    padding-top: 20px;
+}
+
+#header {
+    padding-top: 20px;
+}
+
+.colum-header {
+    height: 10px;
+    background: #996600;
+}
+
+#nav-left-container {
+    width: 240px;
+}
+
+#nav-left {
+    width: 198px;
+    float: left;
+    border: 1px solid #999;
+    color: #996600;
+    border-top: 0px;
+    padding: 20px;
+    font-size: 1.2em;
+}
+
+#nav-top-container {
+    margin-top: 20px;
+}
+
+#nav-top {
+    height: 20px;
+    background: #996600;
+}
+
+#nav-breadcrump {
+    border: 1px solid #999;
+    color: #996600;
+    border-top: 0px;
+    padding: 5px;
+    font-size: 0.8em;
+}
+
+#content {
+    padding-left: 260px;
+}
+
+#footer {
+    margin-top: 20px;
+}
+
+#benchmark-container {
+    font-size: 1.4em;
+    width: 950px;
+    margin: 20px auto;
+}
+
+#benchmark-container table{
+    border: 1px solid #000;
+}
+
+#benchmark-container table td{
+    border-top: 1px solid #999;
+}
+
+#benchmark-container table th, #benchmark-container table td{
+    padding: .3em;
+}
+
+#log-container {
+    font-size: 1.4em;
+    width: 950px;
+    margin: 20px auto;
+}
