@@ -18,19 +18,6 @@
 class App extends SingeltonObject {
 
     /**
-     * Holdes the diffret log messages that is set
-     *
-     * @var array
-     * @access protected
-     * @since 1.0
-     */
-    protected $logValues = array(
-        'error' => array(),
-        'debug' => array(),
-        'notice' => array(),
-    );
-
-    /**
      * Loads the given file from folder
      *
      * @param string $name
@@ -138,38 +125,5 @@ class App extends SingeltonObject {
         } else {
             return false;
         }
-    }
-
-    public static function log($msg, $type = 'debug') {
-        $_this =& self::getInstance();
-        switch($type) {
-            case 'error':
-                $_this->logValues[$type][] = $msg;
-                break;
-            case 'notice':
-                $_this->logValues[$type][] = $msg;
-                break;
-            case 'debug':
-                $_this->logValues[$type][] = $msg;
-                break;
-        }
-    }
-
-    public static function showLog() {
-        $_this =& self::getInstance();
-        $out = '<div id="log-container">';
-        $out .= '<h3>Log</h3>';
-        //echo '<pre>' . print_r($_this->logValues) . '</pre>';
-        foreach ($_this->logValues as $type => $values) {
-            //echo '<pre>' . print_r($value) . '</pre>';
-            $out .= '<h4>' . $type . '</h4>';
-            foreach ($values as $msg) {
-                $out .= $msg . '<br />';
-            }
-        }
-
-        $out .= '</div>';
-
-        return $out;
     }
 }

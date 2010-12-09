@@ -39,16 +39,12 @@ class Router extends SingeltonObject {
 
         $url = explode('/', App::get('sys.route.internal'));
 
-        Benchmark::set('Before');
-
         App::set('sys.route.mod', $url[1]);
         App::set('sys.route.controller', $url[2]);
         App::set('sys.route.action', $url[3]);
         if ($count > 4) {
             App::set('sys.route.params', array_slice($url, 4));
         }
-
-        Benchmark::set('After');
     }
     
 }
