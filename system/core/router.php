@@ -43,26 +43,11 @@ class Router extends SingeltonObject {
 
         Benchmark::set('Before');
 
+        App::set('sys.route.mod', $url[1]);
+        App::set('sys.route.controller', $url[2]);
+        App::set('sys.route.action', $url[3]);
         if ($count > 4) {
-            App::set('sys.route.mod', $url[1]);
-            App::set('sys.route.controller', $url[2]);
-            App::set('sys.route.action', $url[3]);
             App::set('sys.route.params', array_slice($url, 4));
-        } elseif ($count == 4) {
-            App::set('sys.route.mod', $url[1]);
-            App::set('sys.route.controller', $url[2]);
-            App::set('sys.route.action', $url[3]);
-            App::set('sys.route.params', NULL);
-        } elseif ($count == 3) {
-            App::set('sys.route.mod', $url[1]);
-            App::set('sys.route.controller', $url[2]);
-            App::set('sys.route.action', NULL);
-            App::set('sys.route.params', NULL);
-        } elseif ($count == 2) {
-            App::set('sys.route.mod', $url[1]);
-            App::set('sys.route.controller', NULL);
-            App::set('sys.route.action', NULL);
-            App::set('sys.route.params', NULL);
         }
         Benchmark::set('After');
     }
