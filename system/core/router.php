@@ -39,8 +39,6 @@ class Router extends SingeltonObject {
 
         $url = explode('/', App::get('sys.route.internal'));
 
-        $count = count($url);
-
         Benchmark::set('Before');
 
         App::set('sys.route.mod', $url[1]);
@@ -49,6 +47,7 @@ class Router extends SingeltonObject {
         if ($count > 4) {
             App::set('sys.route.params', array_slice($url, 4));
         }
+
         Benchmark::set('After');
     }
     
