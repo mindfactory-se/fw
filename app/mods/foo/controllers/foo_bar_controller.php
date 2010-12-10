@@ -6,7 +6,7 @@ class FooBarController extends ModFooController {
         $model = App::loadModel('foo.bar');
         $model->test();
         $data = array(
-            'params' => App::get('router.paramas'),
+            'params' => 'testing',
         );
 
         $this->set($data);
