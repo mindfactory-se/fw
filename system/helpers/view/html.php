@@ -16,7 +16,6 @@
  *
  * @since 1.0
  * @access public
- * @todo Make methods static
  */
 class Html extends ViewHelper {
 
@@ -29,7 +28,7 @@ class Html extends ViewHelper {
      * @param array $options Options as name, value pairs.
      * @return string Link tag.
      */
-    public function a($href, $title, $options = array()) {
+    public static function a($href, $title, $options = array()) {
         if (!Html::isExternalUrl($href)) {
             $url = App::get('route.base') . $href;
         }
@@ -43,7 +42,7 @@ class Html extends ViewHelper {
      * @param string $path Path to css file
      * @return string CSS link tag.
      */
-    public function css($path) {
+    public static function css($path) {
         if (!Html::isExternalUrl($path)) {
             $path = App::get('route.base') . '/css/' . $path . '.css';
         }
@@ -57,7 +56,7 @@ class Html extends ViewHelper {
      * @param string $charset Charset to be set.
      * @return string Charset tag.
      */
-    public function charset($charset = 'uft-8') {
+    public static function charset($charset = 'uft-8') {
         return sprintf('<meta http-equiv="Content-Type" content="text/html; charset=%s" />', $charset);
     }
 
@@ -68,7 +67,7 @@ class Html extends ViewHelper {
      * @param string $type Tupe of doctype to be set.
      * @return string Doctype tag.
      */
-    public function docType($type = 'xhtml-strict') {
+    public static function docType($type = 'xhtml-strict') {
         switch ($type) {
             case 'html':
                 return '';
@@ -106,7 +105,7 @@ class Html extends ViewHelper {
      * @param array $options Options as name, value pairs.
      * @return string Image tag.
      */
-    public function img($src, $alt = '', $options = array()) {
+    public static function img($src, $alt = '', $options = array()) {
         if (!Html::isExternalUrl($src)) {
             $src = App::get('route.base') . '/img/' . $src;
         }
@@ -119,7 +118,7 @@ class Html extends ViewHelper {
      * @access public
      * @see Html::img()
      */
-    public function image($src, $alt = '', $options = array()) {
+    public static function image($src, $alt = '', $options = array()) {
         Html::img($src, $alt, $options);
     }
 
@@ -129,7 +128,7 @@ class Html extends ViewHelper {
      * @access public
      * @see Html::a()
      */
-    public function link($title, $url, $options = array()) {
+    public static function link($title, $url, $options = array()) {
         html::a($title, $url, $options);
     }
 
@@ -140,7 +139,7 @@ class Html extends ViewHelper {
      * @param array $options Options as name, value pairs.
      * @return string
      */
-    private function buildOptionsString($options) {
+    private static function buildOptionsString($options) {
         $option = '';
         foreach($options as $key => $field) {
                 $option .= ' ' . $key . '="' . $field . '"';
@@ -155,7 +154,7 @@ class Html extends ViewHelper {
      * @param string $url URl to be checked.
      * @return bool True if URL is external.
      */
-    private function isExternalUrl($url) {
+    private static function isExternalUrl($url) {
         if (strpos($url, '://') > 0) {
             return true;
         }
