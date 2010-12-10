@@ -16,7 +16,6 @@
  * 
  * @since 1.0
  * @access public
- * @todo check so paramas is displayed.
  */
 class Controller extends Object {
 
@@ -53,7 +52,6 @@ class Controller extends Object {
      *
      * @access protected
      * @param string $path
-     * @todo Render other then default layouts.
      */
     protected function render($path = '') {
         extract($this->viewVars);

@@ -25,18 +25,13 @@ class Log extends SingeltonObject {
      *
      * @access public
      * @param mixed $msg
-     * @param string $type
-     * @todo rewrite switch statement.
+     * @param string $type notice, debug or error
      */
     public static function set($msg, $type = 'debug') {
         $_this =& self::getInstance();
         switch($type) {
             case 'error':
-                $_this->values[$type][] = $msg;
-                break;
             case 'notice':
-                $_this->values[$type][] = $msg;
-                break;
             case 'debug':
                 $_this->values[$type][] = $msg;
                 break;
