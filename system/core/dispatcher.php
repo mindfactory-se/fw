@@ -41,6 +41,7 @@ class Dispatcher extends Object {
      * controller object and load s the requestet action.
      *
      * @access public
+     * @todo Make submetods in run().
      */
     public function run() {
         if(!App::loadSettings('router')) {
@@ -48,6 +49,7 @@ class Dispatcher extends Object {
         }
 
         Router::match();
+        $this->loadDefaultHelpers();
         
         // Load controllers
         App::load('mods/app_controller');
@@ -75,5 +77,15 @@ class Dispatcher extends Object {
             echo Benchmark::display();
             echo Log::display();
         }
+    }
+
+    /**
+     * Loads the default helpers used in the framework.
+     *
+     * @access private
+     */
+    private function loadDefaultHelpers() {
+        if (!App::loadViewhelper('Html'))
+    die('Error: helpers/view/html not loaded');
     }
 }

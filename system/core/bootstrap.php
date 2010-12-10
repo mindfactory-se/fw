@@ -10,7 +10,6 @@
  * @author hepper
  * @copyright Copyright (c) 2010, Henrik Persson, Pay if you like it
  * @license http://opensource.org/licenses/mit-license.php MIT License
- * @todo Move loadeing of viewHelper Html to better location.
  */
 
 // Sets error reporting to show all errors.
@@ -39,9 +38,6 @@ require_once('view_helper.php');
 require_once('controller_helper.php');
 require_once('model_helper.php');
 require_once(APP_PATH . '/settings/router.php');
-
-if (!App::loadViewhelper('Html'))
-    die('Error: helpers/view/html not loaded');
 
 // Set some system values
 App::set('sys.version', '1.0');
