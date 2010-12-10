@@ -17,7 +17,7 @@
  */
 class Db extends Object {
     /**
-     * Instance of singelton objects
+     * Instance of singleton objects
      *
      * @access protected
      * @var object
@@ -25,7 +25,7 @@ class Db extends Object {
     protected static $inctance = array();
 
     /**
-     * Private constructor to ensure singelton
+     * Private constructor to ensure singleton
      *
      * @access private
      */
@@ -33,7 +33,7 @@ class Db extends Object {
     }
 
     /**
-     * The singelton method.
+     * The singleton method.
      *
      * If the requierd database connection isn't set a new is created.
      *

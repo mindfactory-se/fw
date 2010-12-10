@@ -15,7 +15,7 @@
  * @since 1.0
  * @access public
  */
-class App extends SingeltonObject {
+class App extends SingletonObject {
 
     /**
      * Loads the given file from given path.

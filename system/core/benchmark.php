@@ -14,7 +14,7 @@
  * @since 1.0
  * @access public
  */
-class Benchmark extends SingeltonObject{
+class Benchmark extends SingletonObject {
 
     /**
      * Set the current microtime for the give Leg.

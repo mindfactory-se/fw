@@ -15,7 +15,7 @@
  * @since 1.0
  * @access public
  */
-class Router extends SingeltonObject {
+class Router extends SingletonObject {
 
     /**
      * Invokes the setInOrder method

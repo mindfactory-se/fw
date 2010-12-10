@@ -15,7 +15,7 @@
  * @since 1.0
  * @access public
  */
-class Log extends SingeltonObject {
+class Log extends SingletonObject {
 
     /**
      * Sets a log mesage.

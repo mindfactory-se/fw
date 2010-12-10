@@ -15,5 +15,5 @@
  * @since 1.0
  * @access public
  */
-class Config extends SingeltonObject {
+class Config extends SingletonObject {
 }

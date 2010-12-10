@@ -1,7 +1,7 @@
 <?php
 
 /**
- * p12t PHP Framework : /system/core/singeltonObject.php
+ * p12t PHP Framework : /system/core/singletonObject.php
  *
  * @package p12t
  * @author hepper
@@ -14,12 +14,11 @@
  *
  * @since 1.0
  * @access public
- * @todo Change name to right spelling
  */
-class SingeltonObject extends Object {
+class SingletonObject extends Object {
 
     /**
-     * Instance of singelton objects
+     * Instance of singleton objects
      *
      * @access protected
      * @var object
@@ -36,7 +35,7 @@ class SingeltonObject extends Object {
 	
 	
     /**
-     * Private constructor to ensure singelton
+     * Private constructor to ensure singleton
      *
      * @access private
      */
