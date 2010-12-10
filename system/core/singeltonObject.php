@@ -38,9 +38,8 @@ class SingeltonObject extends Object {
      * Private constructor to ensure singelton
      *
      * @access private
-     * @todo Make private.
      */
-    protected function __construct() {
+    private function __construct() {
     }
 	
     /**
