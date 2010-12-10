@@ -15,28 +15,13 @@
 // Sets error reporting to show all errors.
 error_reporting(E_ALL);
 
-//Includes som files nececery for the framework
-require_once('object.php');
-require_once('singeltonObject.php');
-require_once('benchmark.php');
-
 // Start up Benchmark as soon as possible.
 Benchmark::set('Start');
 
-// Continiue to load files.
-require_once('app.php');
-require_once('log.php');
-require_once('config.php');
-require_once('controller.php');
-require_once('model.php');
+// Includes some files neceesary for the framework.
+
 require_once(APP_PATH . '/settings/config/default.php');
-require_once('router.php');
-require_once('dispatcher.php');
 require_once(APP_PATH . '/settings/router.php');
-require_once('helper.php');
-require_once('view_helper.php');
-require_once('controller_helper.php');
-require_once('model_helper.php');
 require_once(APP_PATH . '/settings/router.php');
 
 // Set some system values
@@ -47,3 +32,13 @@ App::set('sys.Fullname', 'Pay If Yoy Like It PHP Framework');
 // Invoke the dispather class and run the framework.
 $p12t = new Dispatcher;
 $p12t->run();
+
+/**
+ * Autoload function for automatic include of used core classes.
+ *
+ * @access public
+ * @param string $name Name of class to include
+ */
+function __autoload($name) {
+    include SYS_PATH . '/core/' . strtolower($name) . '.php';
+}
