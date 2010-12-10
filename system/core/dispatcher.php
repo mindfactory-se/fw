@@ -41,7 +41,6 @@ class Dispatcher extends Object {
      * controller object and load s the requestet action.
      *
      * @access public
-     * @todo Make submetods in run().
      */
     public function run() {
         if(!App::loadSettings('router')) {
@@ -50,28 +49,9 @@ class Dispatcher extends Object {
 
         Router::match();
         $this->loadDefaultHelpers();
-        
-        // Load controllers
-        App::load('mods/app_controller');
-        App::load('mods/system/mod_system_controller');
-        if (!App::loadController(App::get('sys.route.mod') .'/mod_' . App::get('sys.route.mod') . '_controller')) {
-            $this->redirect('/system/errors/e404/' . str_replace('/', '.', App::get('sys.route.internal')));
-        }
-        if (!App::loadController(App::get('sys.route.mod') . '/controllers/' . App::get('sys.route.mod') . '_' . App::get('sys.route.controller') . '_controller')) {
-            $this->redirect('/system/errors/e404/' . str_replace('/', '.', App::get('sys.route.internal')));
-        }
-        //App::loadController(App::get('route.mod') .'/mod_' . App::get('route.mod') . '_controller');
-        //App::loadController(App::get('route.mod') . '/controllers/' . App::get('route.mod') . '_' . App::get('route.controller') . '_controller');
-
-        // Load appModel
-        App::load('mods/app_model');
-
-        //Create the controller object.
-        $this->controllerName = ucfirst(App::get('sys.route.mod')) . ucfirst(App::get('sys.route.controller')) . 'Controller';
-        $this->controller = new $this->controllerName;
-        
-        //Loads the action;
-        $this->controller->{App::get('sys.route.action')}(App::get('sys.route.params'));
+        $this->loadRequierdFiles();
+        $this->loadControllers();
+        $this->createControllerAction();
 
         if (Config::get('sys.debug.level')) {
             echo Benchmark::display();
@@ -86,6 +66,45 @@ class Dispatcher extends Object {
      */
     private function loadDefaultHelpers() {
         if (!App::loadViewhelper('Html'))
-    die('Error: helpers/view/html not loaded');
+            die('Error: helpers/view/html not loaded');
+    }
+
+    /**
+     * Load the requierd framework files.
+     *
+     * Loads the appcontroller, the system modcontroller and the appmodel.
+     *
+     * @access private
+     */
+    private function loadRequierdFiles() {
+        App::load('mods/app_controller');
+        App::load('mods/system/mod_system_controller');
+        App::load('mods/app_model');
+    }
+
+    /**
+     * Loads the controllers.
+     *
+     * Loads the requested modcontroller and the requested controller. If not
+     * able to load the requested controllers we redrict to 404 page.
+     *
+     * @access private
+     */
+    private function loadControllers() {
+        if (!App::loadController(App::get('sys.route.mod') .'/mod_' . App::get('sys.route.mod') . '_controller')) {
+            $this->redirect('/system/errors/e404/' . str_replace('/', '.', App::get('sys.route.internal')));
+        }
+        if (!App::loadController(App::get('sys.route.mod') . '/controllers/' . App::get('sys.route.mod') . '_' . App::get('sys.route.controller') . '_controller')) {
+            $this->redirect('/system/errors/e404/' . str_replace('/', '.', App::get('sys.route.internal')));
+        }
+    }
+
+    private function createControllerAction() {
+        //Create the controller object.
+        $this->controllerName = ucfirst(App::get('sys.route.mod')) . ucfirst(App::get('sys.route.controller')) . 'Controller';
+        $this->controller = new $this->controllerName;
+
+        //Loads the action
+        $this->controller->{App::get('sys.route.action')}(App::get('sys.route.params'));
     }
 }
