@@ -18,9 +18,10 @@
 class App extends SingeltonObject {
 
     /**
-     * Loads the given file from folder
+     * Loads the given file from given path.
      *
-     * @param string $name
+     * @access public
+     * @param string $name The name or path of the file to be loaded.
      * @return boolean Returns true if file loaded
      */
     public static function load($name) {
@@ -31,7 +32,8 @@ class App extends SingeltonObject {
     /**
      * Loads the given file from controllerfolder
      *
-     * @param string $name
+     * @access public
+     * @param string $name The name of the file to be loaded.
      * @return boolean Returns true if file loaded
      */
     public static function loadController($name) {
@@ -42,7 +44,8 @@ class App extends SingeltonObject {
     /**
      * Loads the given file from corefolder
      *
-     * @param string $name
+     * @access public
+     * @param string $name The name of the file to be loaded.
      * @return boolean Returns true if file loaded
      */
     public static function loadCore($name) {
@@ -53,7 +56,8 @@ class App extends SingeltonObject {
     /**
      * Loads the given file from settingsfolder
      *
-     * @param string $name
+     * @access public
+     * @param string $name The name of the file to be loaded.
      * @return boolean Returns true if file loaded
      */
     public static function loadSettings($name) {
@@ -64,7 +68,8 @@ class App extends SingeltonObject {
     /**
      * Loads the given file from modelfolder
      *
-     * @param string $name
+     * @access public
+     * @param string $name The name of the file to be loaded.
      * @return boolean Returns true if file loaded
      */
     public static function loadModel($name) {
@@ -85,7 +90,8 @@ class App extends SingeltonObject {
     /**
      * Loads the given file from viewfolder
      *
-     * @param string $name
+     * @access public
+     * @param string $name The name of the file to be loaded.
      * @return boolean Returns true if file loaded
      */
     public static function loadView($name, $data) {
@@ -97,7 +103,8 @@ class App extends SingeltonObject {
     /**
      * Loads the given file from viewhelperfolder
      *
-     * @param string $name
+     * @access public
+     * @param string $name The name of the file to be loaded.
      * @return boolean Returns true if file loaded
      */
     public static function loadViewHelper($name) {
@@ -105,11 +112,28 @@ class App extends SingeltonObject {
         return App::loadFile($path);
     }
 
+    /**
+     * Loads the given file from configfolder
+     *
+     * @access public
+     * @param string $name The name of the file to be loaded.
+     * @return boolean Returns true if file loaded
+     */
     public function loadConfig($name) {
         $path = '/settings/config/' . $name . '.php';
         return App::loadFile($path);
     }
 
+    /**
+     * Try to load the file in the give path.
+     *
+     * First try to require the file frome the application folder. If that's not
+     * successfull try to require the file from the system folder insted.
+     *
+     * @access public
+     * @param string $path Holdes the path to the file to be loaded.
+     * @return boolean Returns true if file requierd sucessfully.
+     */
     public static function loadFile($path, $data = null) {
 
         if ($data) {

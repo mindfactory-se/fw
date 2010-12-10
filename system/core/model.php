@@ -9,6 +9,13 @@
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * Base model class.
+ *
+ * Common methods used in all models.
+ *
+ * @since 1.0
+ * @access public
+ */
 class Model extends Object {
-    
 }

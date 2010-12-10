@@ -10,11 +10,14 @@
  */
 
 /**
- * Description of model_helper
+ * Base class of modelhelper.
  *
- * @author hepper
+ * Common methods used in all modelhelpers.
+ *
+ * @since 1.0
+ * @access public
  */
 class ModelHelper extends Helper {
-    //put your code here
+    
 }
 ?>

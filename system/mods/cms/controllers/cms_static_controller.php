@@ -9,8 +9,21 @@
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * CMS controller that uses files on the hard drive to display pages.
+ *
+ * @since 1.0
+ * @access public
+ */
 class CmsStaticController extends ModCmsController {
 
+    /**
+     * Displays the requestetd static page.
+     *
+     * @access public
+     * @todo Chek if it works with subfolders.
+     * @todo Make docbloc about param.
+     */
     public function view() {
         $path = func_get_args();
         $path = '/mods/cms/views/static/' . implode('/', $path[0]) . '.php';

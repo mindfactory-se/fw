@@ -9,11 +9,14 @@
  */
 
 /**
- * Description of view_helper
+ * Base class of viewhelper
  *
- * @author hepper
+ * Common methods used in all viewhelpers
+ *
+ * @since 1.0
+ * @access public
  */
 class ViewHelper extends Helper{
-    //put your code here
+    
 }
 ?>

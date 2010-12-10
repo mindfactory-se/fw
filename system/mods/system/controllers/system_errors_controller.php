@@ -9,8 +9,19 @@
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * Error controller the framework uses to display diffretn error messages.
+ *
+ * @since 1.0
+ * @access public
+ */
 class SystemErrorsController extends ModSystemController{
 
+    /**
+     * An 404 error action.
+     *
+     * @access public
+     */
     public function e404() {
         $this->render();
     }

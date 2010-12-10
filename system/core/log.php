@@ -10,12 +10,24 @@
  */
 
 /**
- * Description of log
+ * Class to log mesages in the framwork
  *
- * @author hepper
+ * @since 1.0
+ * @access public
  */
 class Log extends SingeltonObject {
 
+    /**
+     * Sets a log mesage.
+     *
+     * Overides the parent set metod to be abel to set diffrent types of log
+     * messages.
+     *
+     * @access public
+     * @param mixed $msg
+     * @param string $type
+     * @todo rewrite switch statement.
+     */
     public static function set($msg, $type = 'debug') {
         $_this =& self::getInstance();
         switch($type) {
@@ -31,11 +43,17 @@ class Log extends SingeltonObject {
         }
     }
 
+    /**
+     * Render the log values to displays as HTML.
+     *
+     * @access public
+     * @return string HTML output.
+     */
     public static function display() {
         $_this =& self::getInstance();
         $out = '<div id="log-container">';
         $out .= '<h3>Log</h3>';
-        //echo '<pre>' . print_r($_this->logValues) . '</pre>';
+        
         foreach ($_this->values as $type => $values) {
             //echo '<pre>' . print_r($value) . '</pre>';
             $out .= '<h4>' . $type . '</h4>';

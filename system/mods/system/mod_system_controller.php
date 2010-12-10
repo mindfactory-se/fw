@@ -8,6 +8,12 @@
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * Base system controller.
+ *
+ * @since 1.0
+ * @access public
+ */
 class ModSystemController extends AppController {
     
 }

@@ -9,5 +9,11 @@
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * Configaration class for holding configaration values.
+ *
+ * @since 1.0
+ * @access public
+ */
 class Config extends SingeltonObject {
 }

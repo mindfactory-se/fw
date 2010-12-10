@@ -9,20 +9,26 @@
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * Base class for all the singeltons in the framwork
+ *
+ * @since 1.0
+ * @access public
+ */
 class SingeltonObject extends Object {
 
     /**
-     * Instance of singelton object
+     * Instance of singelton objects
      *
-     * @access private
+     * @access protected
      * @var object
      */
     protected static $inctance = array();
 	
     /**
-     * Holdes the configurations values
+     * Holdes the values set by the class
      *
-     * @access private
+     * @access protected
      * @var array
      */
     protected $values = array();
@@ -30,12 +36,20 @@ class SingeltonObject extends Object {
 	
     /**
      * Private constructor to ensure singelton
+     *
+     * @access private
+     * @todo Make private.
      */
     protected function __construct() {
     }
 	
     /**
-     * The singelton method
+     * The singelton method.
+     *
+     * If no instanse of the class exists a new is created an returned.
+     *
+     * @access public
+     * @return object An instanse of the requested class.
      */
     final public static function &getInstance() {
         $calledClassName = get_called_class();
@@ -47,12 +61,14 @@ class SingeltonObject extends Object {
 
 
     /**
-     * Set a new value
+     * Set a new value.
+     *
+     * Sets a value so it could be returned in the same order as its set.
      *
      * @access public
-     * @param string $name
-     * @param mixed $value
-     * @return boolean
+     * @param string $name Name om variable to be set
+     * @param mixed $value Value of varible to be set.
+     * @return bool True if value is set.
      */
 
     public static function setInOrder($name, $value) {
@@ -65,6 +81,14 @@ class SingeltonObject extends Object {
         }
     }
 
+      /**
+     * Set a new value.
+     *
+     * @access public
+     * @param string $name Name om variable to be set
+     * @param mixed $value Value of varible to be set.
+     * @return bool True if value is set.
+     */
     public static function set($name, $value) {
         $_this =& self::getInstance();
         if (isset($name) && !empty($name) && isset($value)) {
@@ -79,8 +103,8 @@ class SingeltonObject extends Object {
      * Get a value
      *
      * @access public
-     * @param string $name
-     * @return mixed Returns the value of the given name or false.
+     * @param string $name Name of variable to be viewed.
+     * @return mixed Returns the value of the given variable or false.
      */
 
     public static function get($name) {

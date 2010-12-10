@@ -9,12 +9,31 @@
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * Routes the recuest to the right mod, controller and action.
+ *
+ * @since 1.0
+ * @access public
+ */
 class Router extends SingeltonObject {
 
+    /**
+     * Invokes the setInOrder method
+     *
+     * @access public
+     * @param string $name Regex to be search for
+     * @param string $value The route to be matched.
+     * @return bool Returns true if value is set.
+     */
     public static function set($name, $value) {
         return self::setInOrder($name, $value);
     }
 
+    /**
+     * Matches the requestetd url to a route.
+     *
+     * @access public
+     */
     public static function match() {
         $_this =& self::getInstance();
         
@@ -34,6 +53,11 @@ class Router extends SingeltonObject {
         App::set('sys.route.base', $baseUrl);
     }
 
+    /**
+     * Extracts the mod, controller, action and params from the route.
+     *
+     * @access public
+     */
     public static function parse() {
         $_this =& self::getInstance();
 
@@ -42,7 +66,7 @@ class Router extends SingeltonObject {
         App::set('sys.route.mod', $url[1]);
         App::set('sys.route.controller', $url[2]);
         App::set('sys.route.action', $url[3]);
-        if ($count > 4) {
+        if (count($url) > 4) {
             App::set('sys.route.params', array_slice($url, 4));
         }
     }

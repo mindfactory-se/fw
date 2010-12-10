@@ -9,18 +9,36 @@
  */
 
 /**
- * Description of benchmark
+ * A simpel benchmark class to messure the frameworks speed.
  *
- * @author hepper
+ * @since 1.0
+ * @access public
  */
 class Benchmark extends SingeltonObject{
 
+    /**
+     * Set the current microtime for the give Leg.
+     *
+     * Invokes the setInOrder method and adds the microtime as an value.
+     *
+     * @access public
+     * @param string $name The name of the leg to be messured.
+     */
     static public function set($name) {
         return self::setInOrder($name, microtime(true)*1000);
     }
 
+    /**
+     * Displays the recorded messurments.
+     *
+     * Set the "End" messurment and render a simpel html table with the
+     * benchmarks result.
+     *
+     * @access public
+     * @return string returns the renderd html to be displayed.
+     */
     public static function display() {
-        Benchmark::set('end');
+        Benchmark::set('End');
         $_this =& self::getInstance();
 
         $out = '<div id="benchmark-container">';
@@ -32,9 +50,7 @@ class Benchmark extends SingeltonObject{
         $out .= '<th>Leg Time</th>';
         $out .= '</tr>' . "\n";
         
-        $start = $_this->values[0]['start'];
-        $last  = $_this->values[0]['start'];
-        
+        $start = $last = $_this->values[0]['Start'];
 
         foreach ($_this->values as $value) {
             $out .= '<tr>';

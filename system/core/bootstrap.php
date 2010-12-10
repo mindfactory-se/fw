@@ -3,10 +3,14 @@
 /**
  * p12t PHP Framework : /system/core/bootstrap.php
  *
+ * Include all the requierd framework files, set up the first benchmark leg,
+ * sets som system variables and runs the dispather.
+ *
  * @package p12t
  * @author hepper
  * @copyright Copyright (c) 2010, Henrik Persson, Pay if you like it
  * @license http://opensource.org/licenses/mit-license.php MIT License
+ * @todo Move loadeing of viewHelper Html to better location.
  */
 
 // Sets error reporting to show all errors.
@@ -18,7 +22,7 @@ require_once('singeltonObject.php');
 require_once('benchmark.php');
 
 // Start up Benchmark as soon as possible.
-Benchmark::set('start');
+Benchmark::set('Start');
 
 // Continiue to load files.
 require_once('app.php');
@@ -44,5 +48,6 @@ App::set('sys.version', '1.0');
 App::set('sys.name', 'p12t PHP Framework');
 App::set('sys.Fullname', 'Pay If Yoy Like It PHP Framework');
 
+// Invoke the dispather class and run the framework.
 $p12t = new Dispatcher;
 $p12t->run();

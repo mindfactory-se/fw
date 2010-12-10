@@ -9,6 +9,12 @@
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * Base CMS controller.
+ *
+ * @since 1.0
+ * @access public
+ */
 class ModCmsController extends AppController {
     
 }

@@ -10,11 +10,13 @@
  */
 
 /**
- * Description of helper
+ * Base Helper class
  *
- * @author hepper
+ * Common methods used in all helpers
+ *
+ * @since 1.0
+ * @access public
  */
 class Helper extends Object{
-    //put your code here
 }
 ?>

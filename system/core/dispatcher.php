@@ -9,26 +9,36 @@
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * Invokes the framework
+ *
+ * @since 1.0
+ * @access public
+ */
 class Dispatcher extends Object {
 
     /**
      * Holdes the controller object.
      *
      * @access public
-     * @var $controller string
+     * @var string
      */
+    
     public $controller;
 
     /**
      * Holdes the full controller name.
      *
      * @access public
-     * @var $controllerName string
+     * @var string
      */
     public $controllerName;
 
     /**
      * Runs the framework
+     *
+     * Invokes the router and loads the nececery files to create the requested
+     * controller object and load s the requestet action.
      *
      * @access public
      */
@@ -57,7 +67,7 @@ class Dispatcher extends Object {
         //Create the controller object.
         $this->controllerName = ucfirst(App::get('sys.route.mod')) . ucfirst(App::get('sys.route.controller')) . 'Controller';
         $this->controller = new $this->controllerName;
-        App::log('testing');
+        
         //Loads the action;
         $this->controller->{App::get('sys.route.action')}(App::get('sys.route.params'));
 
