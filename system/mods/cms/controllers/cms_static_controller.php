@@ -21,8 +21,7 @@ class CmsStaticController extends ModCmsController {
      * Displays the requestetd static page.
      *
      * @access public
-     * @todo Chek if it works with subfolders.
-     * @todo Make docbloc about param.
+     * @param array Path to file to show.
      */
     public function view() {
         $path = func_get_args();
