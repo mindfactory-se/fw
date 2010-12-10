@@ -3,10 +3,10 @@
 class FooBarModel extends modFooModel {
 
     public function __construct() {
-        //echo 'FooBarModel loaded.';
+        
     }
 
-    public function test() {
-        //echo 'test';
+    public function index() {
+        return 'Mod: foo - OK<br>Controller: bar - OK<br>Action: index - OK';
     }
 }

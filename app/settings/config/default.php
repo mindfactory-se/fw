@@ -11,3 +11,13 @@
 
 
 Config::set('sys.debug.level', 1);
+
+// Database config.
+Config::set('db.default.prefix', 'mysql');
+Config::set('db.default.name', 'p12t');
+Config::set('db.default.user', 'my_user');
+Config::set('db.default.password', 'my_password');
+Config::set('db.default.host', 'localhost');
+Config::set('db.default.port', '3306');
+Config::set('db.default.socket', '/Applications/MAMP/tmp/mysql/mysql.sock');
+Config::set('db.default.useSocket', TRUE);

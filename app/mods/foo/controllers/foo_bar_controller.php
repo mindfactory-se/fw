@@ -3,13 +3,8 @@
 class FooBarController extends ModFooController {
 
     public function index() {
-        $model = App::loadModel('foo.bar');
-        $model->test();
-        $data = array(
-            'params' => 'testing',
-        );
-
-        $this->set($data);
+        $fooBar = App::loadModel('foo.bar');
+        $this->set(array('msg' => $fooBar->index()));
         $this->render();
     }
 }

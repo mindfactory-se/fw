@@ -14,6 +14,7 @@
  *
  * @since 1.0
  * @access public
+ * @todo Change name to right spelling
  */
 class SingeltonObject extends Object {
 

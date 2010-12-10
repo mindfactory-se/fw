@@ -1,3 +1,4 @@
-<pre>
-    <?php print_r($params);?>
-</pre>
+<p>
+    <?php echo $msg ?>
+
+</p>
