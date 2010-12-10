@@ -16,6 +16,7 @@
  * 
  * @since 1.0
  * @access public
+ * @todo check so paramas is displayed.
  */
 class Controller extends Object {
 
@@ -26,6 +27,22 @@ class Controller extends Object {
      * @var array
      */
     protected $viewVars = array();
+
+    /**
+     * Modlayoyt to render.
+     *
+     * @access private
+     * @var string
+     */
+    protected $modLayout = 'default';
+
+    /**
+     * Layout to render.
+     *
+     * @access protected
+     * @var string
+     */
+    protected $layout = 'default';
 
     /**
      * Renders the view.
@@ -50,14 +67,14 @@ class Controller extends Object {
         ob_end_clean();
 
         // Render mod layout
-        $path = '/layouts/' . App::get('sys.route.mod') . '/default.php';
+        $path = '/layouts/' . App::get('sys.route.mod') . '/' . $this->modLayout . '.php';
         ob_start();
         App::loadFile($path, $this->viewVars);
         $this->set(array('content' => ob_get_contents()));
         ob_end_clean();
 
         // Render app layout
-        $path = '/layouts/default.php';
+        $path = '/layouts/' . $this->layout . '.php';
         ob_start();
         App::loadFile($path, $this->viewVars);
         $output = ob_get_contents();
