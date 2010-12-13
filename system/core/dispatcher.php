@@ -106,7 +106,10 @@ class Dispatcher extends Object {
         $this->controller = new $this->controllerName;
 
         //Loads the action
-        //$this->controller->{App::get('sys.route.action')}(App::get('sys.route.params'));
-        call_user_func_array(array($this->controller, App::get('sys.route.action')), App::get('sys.route.params'));
+        if (!is_array(App::get('sys.route.params'))) {
+            $this->controller->{App::get('sys.route.action')}();
+        } else {
+            call_user_func_array(array($this->controller, App::get('sys.route.action')), App::get('sys.route.params'));
+        }
     }
 }
