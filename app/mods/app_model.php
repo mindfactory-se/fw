@@ -9,6 +9,14 @@
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * Application base model class
+ *
+ * Need something in every model? Put it here.
+ *
+ * @since 0.1.0
+ * @access public
+ */
 class AppModel extends Model {
     
 }

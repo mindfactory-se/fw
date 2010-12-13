@@ -11,7 +11,7 @@
 /**
  * A simpel benchmark class to messure the frameworks speed.
  *
- * @since 1.0
+ * @since 0.1.0
  * @access public
  */
 class Benchmark extends SingletonObject {

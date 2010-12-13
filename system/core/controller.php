@@ -14,7 +14,7 @@
  *
  * Contains methods used in all controllers.
  * 
- * @since 1.0
+ * @since 0.1.0
  * @access public
  */
 class Controller extends Object {

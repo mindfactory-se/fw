@@ -12,7 +12,7 @@
 /**
  * CMS controller that uses database to store pages.
  *
- * @since 1.0
+ * @since 0.1.0
  * @access public
  */
 

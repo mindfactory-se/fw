@@ -12,7 +12,7 @@
 /**
  * Base class for all the singeltons in the framwork
  *
- * @since 1.0
+ * @since 0.1.0
  * @access public
  */
 class SingletonObject extends Object {

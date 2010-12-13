@@ -12,7 +12,7 @@
 /**
  * Configaration class for holding configaration values.
  *
- * @since 1.0
+ * @since 0.1.0
  * @access public
  */
 class Config extends SingletonObject {

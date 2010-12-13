@@ -14,7 +14,7 @@
  *
  * Common methods used in all modelhelpers.
  *
- * @since 1.0
+ * @since 0.1.0
  * @access public
  */
 class ModelHelper extends Helper {

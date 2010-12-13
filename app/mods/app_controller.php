@@ -9,6 +9,14 @@
  * @license http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * Application base controller
+ *
+ * Need something in every controller? Put it here.
+ *
+ * @since 0.1.0
+ * @access public
+ */
 class AppController extends Controller {
     
 }

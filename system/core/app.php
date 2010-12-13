@@ -12,7 +12,7 @@
 /**
  * Containing method that needs to be accessed anywhere in the framework
  *
- * @since 1.0
+ * @since 0.1.0
  * @access public
  */
 class App extends SingletonObject {

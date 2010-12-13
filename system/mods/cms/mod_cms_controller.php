@@ -12,7 +12,7 @@
 /**
  * Base CMS controller.
  *
- * @since 1.0
+ * @since 0.1.0
  * @access public
  */
 class ModCmsController extends AppController {

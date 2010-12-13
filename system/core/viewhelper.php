@@ -13,7 +13,7 @@
  *
  * Common methods used in all viewhelpers
  *
- * @since 1.0
+ * @since 0.1.0
  * @access public
  */
 class ViewHelper extends Helper{

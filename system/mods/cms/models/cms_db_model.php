@@ -12,7 +12,7 @@
 /**
  * CMS model that connect to the db.
  *
- * @since 1.0
+ * @since 0.1.0
  * @access public
  */
 class CmsDbModel extends ModCmsModel {

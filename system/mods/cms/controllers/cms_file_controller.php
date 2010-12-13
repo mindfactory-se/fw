@@ -12,7 +12,7 @@
 /**
  * CMS controller that uses files on the hard drive to display pages.
  *
- * @since 1.0
+ * @since 0.1.0
  * @access public
  */
 class CmsFileController extends ModCmsController {

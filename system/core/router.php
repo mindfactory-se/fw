@@ -12,7 +12,7 @@
 /**
  * Routes the recuest to the right mod, controller and action.
  *
- * @since 1.0
+ * @since 0.1.0
  * @access public
  */
 class Router extends SingletonObject {

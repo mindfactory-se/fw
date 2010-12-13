@@ -12,7 +12,7 @@
 /**
  * Handels database connections and querys.
  *
- * @since 1.0
+ * @since 0.1.0
  * @access public
  */
 class Db extends Object {
