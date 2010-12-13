@@ -11,19 +11,21 @@
 
 // Default mod route like
 // Router::SetInOrder('^/modName/?$', '/modName/controllerName/actionName');
-Router::set('^/blog/?$', '/blog/posts/index');
 Router::set('^/foo/?$', '/foo/bar/index');
+Router::set('^/cms/?$', '/cms/file/view/home');
 
 // Route for cms mod
-Router::set('^/cms/static/([a-z0-9/]+)', '/cms/static/view/$1');
-Router::set('^/cms/static/?$', '/cms/static/view/home');
-Router::set('^/cms/?$', '/cms/static/view/home');
-Router::set('^/([a-z0-9]+)/([a-z0-9]+)/([a-z0-9/]+)', '/$1/$2/$3');
+Router::set('^/cms/file/([a-z0-9/]+)', '/cms/file/view/$1');
+Router::set('^/cms/file/?$', '/cms/file/view/home');
+Router::set('^/cms/db/([a-z0-9/]+)', '/cms/db/view/$1');
+Router::set('^/cms/db/?$', '/cms/db/view/1');
 
 // Default action
 Router::set('^/([a-z0-9]+)/([a-z0-9]+)/?$', '/$1/$2/index');
 
 // Default route
-Router::set('^/$', '/cms/static/view/home');
+Router::set('^/$', '/cms/file/view/home');
+
+Router::set('^/([a-z0-9]+)/([a-z0-9]+)/([a-z0-9/]+)', '/$1/$2/$3');
 
 Router::set('^(.*)$', '$1');

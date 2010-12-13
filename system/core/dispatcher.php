@@ -94,6 +94,7 @@ class Dispatcher extends Object {
         if (!App::loadController(App::get('sys.route.mod') .'/mod_' . App::get('sys.route.mod') . '_controller')) {
             $this->redirect('/system/errors/e404/' . str_replace('/', '.', App::get('sys.route.internal')));
         }
+        //echo App::get('sys.route.mod') . '/controllers/' . App::get('sys.route.mod') . '_' . App::get('sys.route.controller') . '_controller<br>';
         if (!App::loadController(App::get('sys.route.mod') . '/controllers/' . App::get('sys.route.mod') . '_' . App::get('sys.route.controller') . '_controller')) {
             $this->redirect('/system/errors/e404/' . str_replace('/', '.', App::get('sys.route.internal')));
         }
@@ -105,6 +106,7 @@ class Dispatcher extends Object {
         $this->controller = new $this->controllerName;
 
         //Loads the action
-        $this->controller->{App::get('sys.route.action')}(App::get('sys.route.params'));
+        //$this->controller->{App::get('sys.route.action')}(App::get('sys.route.params'));
+        call_user_func_array(array($this->controller, App::get('sys.route.action')), App::get('sys.route.params'));
     }
 }
