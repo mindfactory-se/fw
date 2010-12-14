@@ -107,8 +107,8 @@ class App extends SingletonObject {
      * @param string $name The name of the file to be loaded.
      * @return boolean Returns true if file loaded
      */
-    public static function loadViewHelper($name) {
-        $path = '/helpers/view/' . $name . '.php';
+    public static function loadHelper($name) {
+        $path = '/helpers/' . $name . '.php';
         return App::loadFile($path);
     }
 

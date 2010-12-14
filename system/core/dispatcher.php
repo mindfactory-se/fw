@@ -65,7 +65,7 @@ class Dispatcher extends Object {
      * @access private
      */
     private function loadDefaultHelpers() {
-        if (!App::loadViewhelper('Html'))
+        if (!App::loadHelper('Html'))
             die('Error: helpers/view/html not loaded');
     }
 
