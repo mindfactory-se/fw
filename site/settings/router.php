@@ -16,17 +16,17 @@ Router::set('^/foo/?$', '/foo/bar/index');
 Router::set('^/cms/?$', '/cms/file/view/home');
 
 // Route for cms mod
-Router::set('^/cms/file/([a-z0-9/]+)', '/cms/file/view/$1');
 Router::set('^/cms/file/?$', '/cms/file/view/home');
-Router::set('^/cms/db/([a-z0-9/]+)', '/cms/db/view/$1');
+Router::set('^/cms/file/([/a-z0-9_]*)$', '/cms/file/view/$1');
+Router::set('^/cms/db/([0-9]*)$', '/cms/db/view/$1');
 Router::set('^/cms/db/?$', '/cms/db/view/1');
 
 // Default action
-Router::set('^/([a-z0-9]+)/([a-z0-9]+)/?$', '/$1/$2/index');
+Router::set('^/ ([a-z0-9_]*)/([a-z0-9_]*)/?$', '/$1/$2/index');
 
 // Default route
 Router::set('^/$', '/cms/file/view/home');
 
-Router::set('^/([a-z0-9]+)/([a-z0-9]+)/([a-z0-9/]+)', '/$1/$2/$3');
+Router::set('^/([a-z0-9_]*)/([a-z0-9_]*)/([a-z0-9_]*)([/a-z0-9_]*)$', '/$1/$2/$3$4');
 
 Router::set('^(.*)$', '$1');
