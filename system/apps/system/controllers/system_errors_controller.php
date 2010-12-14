@@ -22,7 +22,8 @@ class SystemErrorsController extends AppSystemController{
      *
      * @access public
      */
-    public function e404() {
-        $this->render();
+    public function e404($param) {
+        $param = str_replace('.', '/', $param);
+        $this->render($this->set(array('param' => $param)));
     }
 }

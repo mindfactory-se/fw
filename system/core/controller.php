@@ -44,6 +44,16 @@ class Controller extends Object {
     protected $layout = 'default';
 
     /**
+     * Redirects to the given url.
+     *
+     * @param string $url Url to be redirectetd to.
+     */
+    public function redirect($url) {
+        echo header('Location: ' . $url);
+        exit;
+    }
+
+    /**
      * Renders the view.
      *
      * Renders the view in tree steps. Fista the controller view. Second the mod

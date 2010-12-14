@@ -19,12 +19,6 @@ error_reporting(E_ALL);
 // Start up Benchmark as soon as possible.
 Benchmark::set('Start');
 
-// Includes some files neceesary for the framework.
-
-require_once(SITE_PATH . '/settings/config/default.php');
-require_once(SITE_PATH . '/settings/router.php');
-require_once(SITE_PATH . '/settings/router.php');
-
 // Set some system values
 App::set('sys.version', '0.1.0');
 App::set('sys.name', 'p12t Framework');

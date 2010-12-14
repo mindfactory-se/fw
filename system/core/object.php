@@ -17,13 +17,4 @@
  */
 class Object {
 
-    /**
-     * Redirects to the given url.
-     *
-     * @param string $url Url to be redirectetd to.
-     */
-    public function redirect($url) {
-        echo header('Location: ' . $url);
-        exit;
-    }
 }

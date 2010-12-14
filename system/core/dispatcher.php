@@ -43,13 +43,10 @@ class Dispatcher extends Object {
      * @access public
      */
     public function run() {
-        if(!App::loadSettings('router')) {
-            die('Error: settings/router not loaded');
-        }
 
+        $this->loadRequierdFiles();
         Router::match();
         $this->loadDefaultHelpers();
-        $this->loadRequierdFiles();
         $this->loadControllers();
         $this->createControllerAction();
 
@@ -77,6 +74,8 @@ class Dispatcher extends Object {
      * @access private
      */
     private function loadRequierdFiles() {
+        App::loadSettings('router');
+        App::loadSettings('config/default');
         App::load('apps/site_controller');
         App::load('apps/system/app_system_controller');
         App::load('apps/site_model');
@@ -92,11 +91,21 @@ class Dispatcher extends Object {
      */
     private function loadControllers() {
         if (!App::loadController(App::get('sys.route.app') .'/app_' . App::get('sys.route.app') . '_controller')) {
-            $this->redirect('/system/errors/e404/' . str_replace('/', '.', App::get('sys.route.internal')));
+            App::loadController('system/app_system_controller');
+            App::set('sys.route.app', 'system');
+            App::set('sys.route.controller', 'errors');
+            App::set('sys.route.action', 'e404');
+            App::set('sys.route.params', array(str_replace('/', '.', App::get('sys.route.visible'))));
         }
-        //echo App::get('sys.route.mod') . '/controllers/' . App::get('sys.route.mod') . '_' . App::get('sys.route.controller') . '_controller<br>';
+        
         if (!App::loadController(App::get('sys.route.app') . '/controllers/' . App::get('sys.route.app') . '_' . App::get('sys.route.controller') . '_controller')) {
-            $this->redirect('/system/errors/e404/' . str_replace('/', '.', App::get('sys.route.internal')));
+            //$this->redirect('/system/errors/e404/' . str_replace('/', '.', App::get('sys.route.internal')));
+            App::loadController('system/app_system_controller');
+            App::loadController('system/controllers/system_errors_controller');
+            App::set('sys.route.app', 'system');
+            App::set('sys.route.controller', 'errors');
+            App::set('sys.route.action', 'e404');
+            App::set('sys.route.params', array(str_replace('/', '.', App::get('sys.route.visible'))));
         }
     }
 
@@ -104,6 +113,16 @@ class Dispatcher extends Object {
         //Create the controller object.
         $this->controllerName = ucfirst(App::get('sys.route.app')) . ucfirst(App::get('sys.route.controller')) . 'Controller';
         $this->controller = new $this->controllerName;
+
+        if (!method_exists($this->controller, App::get('sys.route.action'))) {
+            App::loadController('system/app_system_controller');
+            App::loadController('system/controllers/system_errors_controller');
+            $this->controller = new SystemErrorsController;
+            App::set('sys.route.app', 'system');
+            App::set('sys.route.controller', 'errors');
+            App::set('sys.route.action', 'e404');
+            App::set('sys.route.params', array(str_replace('/', '.', App::get('sys.route.visible'))));
+        }
 
         //Loads the action
         if (!is_array(App::get('sys.route.params'))) {
