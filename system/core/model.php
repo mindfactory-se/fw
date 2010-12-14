@@ -18,4 +18,8 @@
  * @access public
  */
 class Model extends Object {
+
+    public function  __construct() {
+        parent::__construct();
+    }
 }

@@ -17,6 +17,10 @@
  */
 class CmsFileController extends AppCmsController {
 
+    public function  __construct() {
+        parent::__construct();
+    }
+    
     /**
      * Displays the requestetd static page.
      *

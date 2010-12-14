@@ -18,5 +18,8 @@
  * @access public
  */
 class SiteModel extends Model {
-    
+
+    public function  __construct() {
+        parent::__construct();
+    }
 }

@@ -17,6 +17,10 @@
  */
 class SystemErrorsController extends AppSystemController{
 
+    public function  __construct() {
+        parent::__construct();
+    }
+    
     /**
      * An 404 error action.
      *

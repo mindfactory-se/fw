@@ -15,5 +15,8 @@
  * @access public
  */
 class AppFooModel extends SiteModel {
-    
+
+    public function  __construct() {
+        parent::__construct();
+    }
 }

@@ -15,7 +15,7 @@
  * @since 0.1.0
  * @access public
  */
-class SingletonObject extends Object {
+class SingletonObject {
 
     /**
      * Instance of singleton objects

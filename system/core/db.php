@@ -15,7 +15,7 @@
  * @since 0.1.0
  * @access public
  */
-class Db extends Object {
+class Db {
     /**
      * Instance of singleton objects
      *

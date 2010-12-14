@@ -17,6 +17,10 @@
  */
 class CmsDbModel extends AppCmsModel {
 
+    public function  __construct() {
+        parent::__construct();
+    }
+
     public function view($id) {
         $db = Db::getInstance();
         return $db->query('SELECT title, body FROM cms_db WHERE id='. $id)->fetch();

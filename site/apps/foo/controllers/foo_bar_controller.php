@@ -17,6 +17,10 @@
  */
 class FooBarController extends AppFooController {
 
+    public function  __construct() {
+        parent::__construct();
+    }
+    
     public function index() {
         $fooBar = App::loadModel('foo.bar');
         $this->set(array('msg' => $fooBar->index()));

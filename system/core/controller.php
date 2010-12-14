@@ -43,6 +43,10 @@ class Controller extends Object {
      */
     protected $layout = 'default';
 
+    public function  __construct() {
+        parent::__construct();
+    }
+
     /**
      * Redirects to the given url.
      *

@@ -16,5 +16,8 @@
  * @access public
  */
 class AppCmsModel extends SiteModel {
-    
+
+    public function  __construct() {
+        parent::__construct();
+    }
 }

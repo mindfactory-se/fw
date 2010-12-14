@@ -34,6 +34,10 @@ class Dispatcher extends Object {
      */
     public $controllerName;
 
+    public function  __construct() {
+        parent::__construct();
+    }
+
     /**
      * Runs the framework
      *
@@ -46,7 +50,6 @@ class Dispatcher extends Object {
 
         $this->loadRequierdFiles();
         Router::match();
-        $this->loadDefaultHelpers();
         $this->loadControllers();
         $this->createControllerAction();
 
@@ -54,16 +57,6 @@ class Dispatcher extends Object {
             echo Benchmark::display();
             echo Log::display();
         }
-    }
-
-    /**
-     * Loads the default helpers used in the framework.
-     *
-     * @access private
-     */
-    private function loadDefaultHelpers() {
-        if (!App::loadHelper('Html'))
-            die('Error: helpers/view/html not loaded');
     }
 
     /**

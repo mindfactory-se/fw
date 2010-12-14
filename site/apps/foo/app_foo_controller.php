@@ -16,5 +16,8 @@
  * @access public
  */
 class AppFooController extends SiteController {
-    
+
+    public function  __construct() {
+        parent::__construct();
+    }
 }

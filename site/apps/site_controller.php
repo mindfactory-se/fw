@@ -18,5 +18,9 @@
  * @access public
  */
 class SiteController extends Controller {
-    
+
+    public function  __construct() {
+        parent::__construct();
+        App::loadHelper('Html');
+    }
 }

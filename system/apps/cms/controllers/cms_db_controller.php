@@ -17,6 +17,11 @@
  */
 
 class CmsDbController extends AppCmsController {
+
+    public function  __construct() {
+        parent::__construct();
+    }
+    
     public function view($id = NULL) {
     $model = App::loadModel('cms.db');
     //print_r($model->view($id));
