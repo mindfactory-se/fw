@@ -40,18 +40,6 @@ class App extends SingletonObject {
         $path = '/apps/' . $name . '.php';
         return App::loadFile($path);
     }
-    
-    /**
-     * Loads the given file from corefolder
-     *
-     * @access public
-     * @param string $name The name of the file to be loaded.
-     * @return boolean Returns true if file loaded
-     */
-    public static function loadCore($name) {
-        $path = '/core/' . $name . '.php';
-        return App::loadFile($path);
-    }
 
     /**
      * Loads the given file from settingsfolder
