@@ -37,7 +37,7 @@ class App extends SingletonObject {
      * @return boolean Returns true if file loaded
      */
     public static function loadController($name) {
-        $path = '/mods/' . $name . '.php';
+        $path = '/apps/' . $name . '.php';
         return App::loadFile($path);
     }
     
@@ -76,11 +76,11 @@ class App extends SingletonObject {
         $name = explode('.', $name);
         
         //Load mod model
-        $path = '/mods/' . $name[0] . '/mod_' . $name[0] . '_model.php';
+        $path = '/apps/' . $name[0] . '/app_' . $name[0] . '_model.php';
         App::loadFile($path);
 
         //Load requested model
-        $path = '/mods/' . $name[0] . '/models/' . $name[0] . '_' . $name[1] . '_model.php';
+        $path = '/apps/' . $name[0] . '/models/' . $name[0] . '_' . $name[1] . '_model.php';
         if (App::loadFile($path)) {
             $modelName = ucfirst($name[0]) . ucfirst($name[1]) . 'Model';
             return new $modelName;
@@ -96,7 +96,7 @@ class App extends SingletonObject {
      */
     public static function loadView($name, $data) {
         $name = explode('.', $name);
-        $path = '/mods/' . $name[0] . '/views/' . $name[1] . '/' . $name[2] . '.php';
+        $path = '/apps/' . $name[0] . '/views/' . $name[1] . '/' . $name[2] . '.php';
         return App::loadFile($path);
     }
 
@@ -140,8 +140,8 @@ class App extends SingletonObject {
             extract($data);
         }
         // Load the file. First try from app and second from system.
-        if (file_exists(APP_PATH . $path)) {
-            require_once(APP_PATH . $path);
+        if (file_exists(SITE_PATH . $path)) {
+            require_once(SITE_PATH . $path);
             return true;
         } elseif (file_exists(SYS_PATH . $path)) {
             require_once(SYS_PATH . $path);

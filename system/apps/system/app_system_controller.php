@@ -1,7 +1,6 @@
 <?php
-
 /**
- * p12t PHP Framework : /system/mods/cms/mod_cms_controller.php
+ * p12t PHP Framework : /system/mods/system/mod_system_controllers.php
  *
  * @package p12t
  * @author hepper
@@ -10,11 +9,11 @@
  */
 
 /**
- * Base CMS controller.
+ * Base system controller.
  *
  * @since 0.1.0
  * @access public
  */
-class ModCmsController extends AppController {
+class AppSystemController extends SiteController {
     
 }

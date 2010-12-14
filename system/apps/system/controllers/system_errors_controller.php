@@ -15,7 +15,7 @@
  * @since 1.0
  * @access public
  */
-class SystemErrorsController extends ModSystemController{
+class SystemErrorsController extends AppSystemController{
 
     /**
      * An 404 error action.

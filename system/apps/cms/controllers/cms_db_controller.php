@@ -16,7 +16,7 @@
  * @access public
  */
 
-class CmsDbController extends ModCmsController {
+class CmsDbController extends AppCmsController {
     public function view($id = NULL) {
     $model = App::loadModel('cms.db');
     //print_r($model->view($id));

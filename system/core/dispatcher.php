@@ -77,9 +77,9 @@ class Dispatcher extends Object {
      * @access private
      */
     private function loadRequierdFiles() {
-        App::load('mods/app_controller');
-        App::load('mods/system/mod_system_controller');
-        App::load('mods/app_model');
+        App::load('apps/site_controller');
+        App::load('apps/system/app_system_controller');
+        App::load('apps/site_model');
     }
 
     /**
@@ -91,18 +91,18 @@ class Dispatcher extends Object {
      * @access private
      */
     private function loadControllers() {
-        if (!App::loadController(App::get('sys.route.mod') .'/mod_' . App::get('sys.route.mod') . '_controller')) {
+        if (!App::loadController(App::get('sys.route.app') .'/app_' . App::get('sys.route.app') . '_controller')) {
             $this->redirect('/system/errors/e404/' . str_replace('/', '.', App::get('sys.route.internal')));
         }
         //echo App::get('sys.route.mod') . '/controllers/' . App::get('sys.route.mod') . '_' . App::get('sys.route.controller') . '_controller<br>';
-        if (!App::loadController(App::get('sys.route.mod') . '/controllers/' . App::get('sys.route.mod') . '_' . App::get('sys.route.controller') . '_controller')) {
+        if (!App::loadController(App::get('sys.route.app') . '/controllers/' . App::get('sys.route.app') . '_' . App::get('sys.route.controller') . '_controller')) {
             $this->redirect('/system/errors/e404/' . str_replace('/', '.', App::get('sys.route.internal')));
         }
     }
 
     private function createControllerAction() {
         //Create the controller object.
-        $this->controllerName = ucfirst(App::get('sys.route.mod')) . ucfirst(App::get('sys.route.controller')) . 'Controller';
+        $this->controllerName = ucfirst(App::get('sys.route.app')) . ucfirst(App::get('sys.route.controller')) . 'Controller';
         $this->controller = new $this->controllerName;
 
         //Loads the action

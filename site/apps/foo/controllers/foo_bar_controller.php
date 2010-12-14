@@ -1,7 +1,7 @@
 <?php
 
 /**
- * p12t PHP Framework : /app/mods/foo/controllers/foo_bar_model.php
+ * p12t PHP Framework : /app/mods/foo/controllers/foo_bar_controller.php
  *
  * @package p12t
  * @author hepper
@@ -15,13 +15,11 @@
  * @since 0.1.0
  * @access public
  */
-class FooBarModel extends modFooModel {
-
-    public function __construct() {
-        
-    }
+class FooBarController extends AppFooController {
 
     public function index() {
-        return 'Mod: foo - OK<br>Controller: bar - OK<br>Action: index - OK';
+        $fooBar = App::loadModel('foo.bar');
+        $this->set(array('msg' => $fooBar->index()));
+        $this->render();
     }
 }

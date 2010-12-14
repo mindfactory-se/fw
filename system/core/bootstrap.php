@@ -21,14 +21,14 @@ Benchmark::set('Start');
 
 // Includes some files neceesary for the framework.
 
-require_once(APP_PATH . '/settings/config/default.php');
-require_once(APP_PATH . '/settings/router.php');
-require_once(APP_PATH . '/settings/router.php');
+require_once(SITE_PATH . '/settings/config/default.php');
+require_once(SITE_PATH . '/settings/router.php');
+require_once(SITE_PATH . '/settings/router.php');
 
 // Set some system values
-App::set('sys.version', '1.0');
-App::set('sys.name', 'p12t PHP Framework');
-App::set('sys.Fullname', 'Pay If Yoy Like It PHP Framework');
+App::set('sys.version', '0.1.0');
+App::set('sys.name', 'p12t Framework');
+App::set('sys.Fullname', 'Pay If Yoy Like It Framework');
 
 // Invoke the dispather class and run the framework.
 $p12t = new Dispatcher;

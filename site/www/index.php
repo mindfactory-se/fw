@@ -12,7 +12,7 @@
 
 // Change value to your application path
 //define('APP_PATH', '/path/to/app/folder');
-define('APP_PATH', '/Users/hepper/Sites/www/p12t/app');
+define('SITE_PATH', '/Users/hepper/Sites/www/p12t/site');
 
 // Change value to your e7 path
 //define('E7_PATH', '/path/to/e7/folder');

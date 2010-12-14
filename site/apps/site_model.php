@@ -1,7 +1,7 @@
 <?php
 
 /**
- * p12t PHP Framework : /system/mods/cms/mod_cms_model.php
+ * p12t PHP Framework : /app/mods/app_model.php
  *
  * @package p12t
  * @author hepper
@@ -10,11 +10,13 @@
  */
 
 /**
- * Base CMS controller.
+ * Application base model class
+ *
+ * Need something in every model? Put it here.
  *
  * @since 0.1.0
  * @access public
  */
-class ModCmsModel extends AppModel {
+class SiteModel extends Model {
     
 }

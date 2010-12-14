@@ -15,10 +15,9 @@
  * @since 0.1.0
  * @access public
  */
-class CmsDbModel extends ModCmsModel {
+class CmsDbModel extends AppCmsModel {
 
     public function view($id) {
-        print_r($id);
         $db = Db::getInstance();
         return $db->query('SELECT title, body FROM cms_db WHERE id='. $id)->fetch();
     }

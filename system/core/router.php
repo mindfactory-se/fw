@@ -63,7 +63,7 @@ class Router extends SingletonObject {
 
         $url = explode('/', App::get('sys.route.internal'));
 
-        App::set('sys.route.mod', $url[1]);
+        App::set('sys.route.app', $url[1]);
         App::set('sys.route.controller', $url[2]);
         App::set('sys.route.action', $url[3]);
         if (count($url) > 4) {

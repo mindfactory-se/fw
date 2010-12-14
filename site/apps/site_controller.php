@@ -1,7 +1,7 @@
 <?php
 
 /**
- * p12t PHP Framework : /app/mods/app_model.php
+ * p12t PHP Framework : /app/mods/app_controller.php
  *
  * @package p12t
  * @author hepper
@@ -10,13 +10,13 @@
  */
 
 /**
- * Application base model class
+ * Application base controller
  *
- * Need something in every model? Put it here.
+ * Need something in every controller? Put it here.
  *
  * @since 0.1.0
  * @access public
  */
-class AppModel extends Model {
+class SiteController extends Controller {
     
 }

@@ -15,7 +15,7 @@
  * @since 0.1.0
  * @access public
  */
-class CmsFileController extends ModCmsController {
+class CmsFileController extends AppCmsController {
 
     /**
      * Displays the requestetd static page.
@@ -25,7 +25,7 @@ class CmsFileController extends ModCmsController {
      */
     public function view() {
         $path = func_get_args();
-        $path = '/mods/cms/views/file/' . implode('/', $path) . '.php';
+        $path = '/apps/cms/views/file/' . implode('/', $path) . '.php';
         $this->render($path);
     }
 }

@@ -57,7 +57,7 @@ class Controller extends Object {
         extract($this->viewVars);
 
         if (empty($path)) {
-            $path = '/mods/' . App::get('sys.route.mod') . '/views/' . App::get('sys.route.controller') . '/' . App::get('sys.route.action') . '.php';
+            $path = '/apps/' . App::get('sys.route.app') . '/views/' . App::get('sys.route.controller') . '/' . App::get('sys.route.action') . '.php';
         }
         ob_start();
         App::loadFile($path, $this->viewVars);
@@ -65,7 +65,7 @@ class Controller extends Object {
         ob_end_clean();
 
         // Render mod layout
-        $path = '/layouts/' . App::get('sys.route.mod') . '/' . $this->modLayout . '.php';
+        $path = '/layouts/' . App::get('sys.route.app') . '/' . $this->modLayout . '.php';
         ob_start();
         App::loadFile($path, $this->viewVars);
         $this->set(array('content' => ob_get_contents()));
