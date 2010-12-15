@@ -89,7 +89,7 @@ class App extends SingletonObject {
     }
 
     /**
-     * Loads the given file from viewhelperfolder
+     * Loads the given file from helperfolder
      *
      * @access public
      * @param string $name The name of the file to be loaded.

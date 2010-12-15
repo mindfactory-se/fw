@@ -10,7 +10,7 @@
  */
 
 /**
- * Example mod to show file structure and basic usage.
+ * Example app to show file structure and basic usage.
  *
  * @since 0.1.0
  * @access public

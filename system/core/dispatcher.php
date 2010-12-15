@@ -42,7 +42,7 @@ class Dispatcher extends Object {
      * Runs the framework
      *
      * Invokes the router and loads the nececery files to create the requested
-     * controller object and load s the requestet action.
+     * controller object and load s the requested action.
      *
      * @access public
      */
@@ -62,7 +62,7 @@ class Dispatcher extends Object {
     /**
      * Load the requierd framework files.
      *
-     * Loads the appcontroller, the system modcontroller and the appmodel.
+     * Loads the config files, sitecontroller, sitemodel and system appcontroller.
      *
      * @access private
      */
@@ -77,8 +77,8 @@ class Dispatcher extends Object {
     /**
      * Loads the controllers.
      *
-     * Loads the requested modcontroller and the requested controller. If not
-     * able to load the requested controllers we redrict to 404 page.
+     * Loads the requested appcontroller and the requested controller. If not
+     * able to load the requested controllers we load the sytem error controllerz.
      *
      * @access private
      */
@@ -102,6 +102,11 @@ class Dispatcher extends Object {
         }
     }
 
+    /**
+     * Creates the controller and calls the action.
+     *
+     * @access private
+     */
     private function createControllerAction() {
         //Create the controller object.
         $this->controllerName = ucfirst(App::get('sys.route.app')) . ucfirst(App::get('sys.route.controller')) . 'Controller';

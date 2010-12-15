@@ -10,7 +10,7 @@
  */
 
 /**
- * Routes the recuest to the right mod, controller and action.
+ * Routes the recuest to the right app, controller and action.
  *
  * @since 0.1.0
  * @access public
@@ -54,7 +54,7 @@ class Router extends SingletonObject {
     }
 
     /**
-     * Extracts the mod, controller, action and params from the route.
+     * Extracts the app, controller, action and params from the route.
      *
      * @access public
      */

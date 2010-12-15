@@ -10,12 +10,12 @@
  * @since 0.1.0
  */
 
-// Default mod route like
+// Default app route like
 // Router::SetInOrder('^/modName/?$', '/modName/controllerName/actionName');
 Router::set('^/foo/?$', '/foo/bar/index');
 Router::set('^/cms/?$', '/cms/file/view/home');
 
-// Route for cms mod
+// Route for cms app
 Router::set('^/cms/file/?$', '/cms/file/view/home');
 Router::set('^/cms/file/([/a-z0-9_]*)$', '/cms/file/view/$1');
 Router::set('^/cms/db/([0-9]*)$', '/cms/db/view/$1');

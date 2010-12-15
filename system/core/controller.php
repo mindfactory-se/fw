@@ -28,12 +28,12 @@ class Controller extends Object {
     protected $viewVars = array();
 
     /**
-     * Modlayoyt to render.
+     * Applayoyt to render.
      *
      * @access private
      * @var string
      */
-    protected $modLayout = 'default';
+    protected $appLayout = 'default';
 
     /**
      * Layout to render.
@@ -60,7 +60,7 @@ class Controller extends Object {
     /**
      * Renders the view.
      *
-     * Renders the view in tree steps. Fista the controller view. Second the mod
+     * Renders the view in tree steps. First the controller view. Second the app
      * layout and third the site layout. If no path is given the view based on
      * controller and action is renderd.
      *
@@ -79,7 +79,7 @@ class Controller extends Object {
         ob_end_clean();
 
         // Render mod layout
-        $path = '/layouts/' . App::get('sys.route.app') . '/' . $this->modLayout . '.php';
+        $path = '/layouts/' . App::get('sys.route.app') . '/' . $this->appLayout . '.php';
         ob_start();
         App::loadFile($path, $this->viewVars);
         $this->set(array('content' => ob_get_contents()));
