@@ -51,7 +51,9 @@ class Dispatcher extends Object {
         $this->loadRequierdFiles();
         Router::match();
         $this->loadControllers();
-        $this->createControllerAction();
+        $this->createController();
+        if (isset($_POST['data'])) $this->controller->data = $_POST['data'];
+        $this->invokeAction();
 
         if (Config::get('sys.debug.level')) {
             echo Benchmark::display();
@@ -103,11 +105,11 @@ class Dispatcher extends Object {
     }
 
     /**
-     * Creates the controller and calls the action.
+     * Creates the controller.
      *
      * @access private
      */
-    private function createControllerAction() {
+    private function createController() {
         //Create the controller object.
         $this->controllerName = ucfirst(App::get('sys.route.app')) . ucfirst(App::get('sys.route.controller')) . 'Controller';
         $this->controller = new $this->controllerName;
@@ -121,8 +123,14 @@ class Dispatcher extends Object {
             App::set('sys.route.action', 'e404');
             App::set('sys.route.params', array(str_replace('/', '.', App::get('sys.route.visible'))));
         }
+    }
 
-        //Loads the action
+    /**
+     * Invokes the action.
+     *
+     * @access private
+     */
+    private function invokeAction() {
         if (!is_array(App::get('sys.route.params'))) {
             $this->controller->{App::get('sys.route.action')}();
         } else {

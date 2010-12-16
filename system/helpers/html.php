@@ -30,9 +30,9 @@ class Html extends Helper {
      */
     public static function a($href, $title, $options = array()) {
         if (!Html::isExternalUrl($href)) {
-            $url = App::get('route.base') . $href;
+            $url = App::get('sys.route.base') . $href;
         }
-        return '<a href="' . $href . '"' . HTML::buildOptionsString($options) . '>' . $title .'</a>';
+        return '<a href="' . $href . '"' . Html::buildOptionsString($options) . '>' . $title .'</a>';
     }
 
     /**
@@ -44,7 +44,7 @@ class Html extends Helper {
      */
     public static function css($path) {
         if (!Html::isExternalUrl($path)) {
-            $path = App::get('route.base') . '/css/' . $path . '.css';
+            $path = App::get('sys.route.base') . '/css/' . $path . '.css';
         }
         return sprintf('<link rel="stylesheet" type="text/css" href="%s" />', $path);
     }
@@ -107,7 +107,7 @@ class Html extends Helper {
      */
     public static function img($src, $alt = '', $options = array()) {
         if (!Html::isExternalUrl($src)) {
-            $src = App::get('route.base') . '/img/' . $src;
+            $src = App::get('sys.route.base') . '/img/' . $src;
         }
         return '<img src="' . $src . '" alt="' . $alt . '"' . HTML::buildOptionsString($options) . ' />';
     }
@@ -132,32 +132,5 @@ class Html extends Helper {
         html::a($title, $url, $options);
     }
 
-    /**
-     * Builds a string of options to put in a tag.
-     *
-     * @access private
-     * @param array $options Options as name, value pairs.
-     * @return string
-     */
-    private static function buildOptionsString($options) {
-        $option = '';
-        foreach($options as $key => $field) {
-                $option .= ' ' . $key . '="' . $field . '"';
-            }
-        return $option;
-    }
-
-    /**
-     * Checks if a url is external.
-     *
-     * @access private
-     * @param string $url URl to be checked.
-     * @return bool True if URL is external.
-     */
-    private static function isExternalUrl($url) {
-        if (strpos($url, '://') > 0) {
-            return true;
-        }
-    }
 }
 ?>

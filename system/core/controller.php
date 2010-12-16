@@ -20,6 +20,14 @@
 class Controller extends Object {
 
     /**
+     * Contains data posted with form.
+     *
+     * @access protected
+     * @var array
+     */
+    public $data = array();
+
+    /**
      * Contains all variables needed in the view.
      * 
      * @access protected

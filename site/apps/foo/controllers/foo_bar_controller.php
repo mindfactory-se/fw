@@ -19,11 +19,13 @@ class FooBarController extends AppFooController {
 
     public function  __construct() {
         parent::__construct();
+        App::loadHelper('form');
     }
     
     public function index() {
         $fooBar = App::loadModel('foo.bar');
-        $this->set(array('msg' => $fooBar->index()));
+        //$this->set(array('msg' => $fooBar->index()));
+        $this->set(array('msg' => $this->data));
         $this->render();
     }
 }
