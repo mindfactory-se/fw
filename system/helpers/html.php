@@ -17,7 +17,7 @@
  * @since 0.1.0
  * @access public
  */
-class Html extends Helper {
+class Html extends Vhelper {
 
     /**
      * Makes a hypertext link tag.

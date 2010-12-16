@@ -17,7 +17,7 @@
  * @since 0.2.0
  * @access public
  */
-class Form extends Helper {
+class Form extends Vhelper {
 
     /**
      * Load dependent helpers
