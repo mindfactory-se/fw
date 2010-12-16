@@ -19,4 +19,4 @@ define('SITE_PATH', '/Users/hepper/Sites/www/p12t/site');
 define('SYS_PATH', '/Users/hepper/Sites/www/p12t/system');
 
 // incluedes the bootstarp file
-require_once(SYS_PATH . '/core/bootstrap.php');
+require_once(SYS_PATH . '/core/boot.php');
