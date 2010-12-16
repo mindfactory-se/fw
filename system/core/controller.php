@@ -28,12 +28,19 @@ class Controller extends Object {
     public $data = array();
 
     /**
+     * Holdes the viev object.
+     * 
+     * @var object
+     */
+    public $view;
+
+    /**
      * Contains all variables needed in the view.
      * 
      * @access protected
      * @var array
      */
-    protected $viewVars = array();
+    public $viewVars = array();
 
     /**
      * Applayoyt to render.
@@ -41,7 +48,7 @@ class Controller extends Object {
      * @access private
      * @var string
      */
-    protected $appLayout = 'default';
+    public $appLayout = 'default';
 
     /**
      * Layout to render.
@@ -49,7 +56,7 @@ class Controller extends Object {
      * @access protected
      * @var string
      */
-    protected $layout = 'default';
+    public $layout = 'default';
 
     public function  __construct() {
         parent::__construct();
@@ -65,42 +72,11 @@ class Controller extends Object {
         exit;
     }
 
-    /**
-     * Renders the view.
-     *
-     * Renders the view in tree steps. First the controller view. Second the app
-     * layout and third the site layout. If no path is given the view based on
-     * controller and action is renderd.
-     *
-     * @access protected
-     * @param string $path
-     */
     protected function render($path = '') {
-        extract($this->viewVars);
 
-        if (empty($path)) {
-            $path = '/apps/' . App::get('sys.route.app') . '/views/' . App::get('sys.route.controller') . '/' . App::get('sys.route.action') . '.php';
-        }
-        ob_start();
-        App::loadFile($path, $this->viewVars);
-        $this->set(array('viewContent' => ob_get_contents()));
-        ob_end_clean();
+        $this->view = new View($this);
+        $this->view->render($path);
 
-        // Render mod layout
-        $path = '/layouts/' . App::get('sys.route.app') . '/' . $this->appLayout . '.php';
-        ob_start();
-        App::loadFile($path, $this->viewVars);
-        $this->set(array('content' => ob_get_contents()));
-        ob_end_clean();
-
-        // Render app layout
-        $path = '/layouts/' . $this->layout . '.php';
-        ob_start();
-        App::loadFile($path, $this->viewVars);
-        $output = ob_get_contents();
-        ob_end_clean();
-
-        echo $output;
     }
 
     /**

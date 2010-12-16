@@ -20,9 +20,9 @@ error_reporting(E_ALL);
 Benchmark::set('Start');
 
 // Set some system values
-App::set('sys.version', '0.1.0');
+App::set('sys.version', '0.2.0');
 App::set('sys.name', 'p12t Framework');
-App::set('sys.Fullname', 'Pay If Yoy Like It Framework');
+App::set('sys.fullname', 'Pay If Yoy Like It Framework');
 
 // Invoke the dispather class and run the framework.
 $p12t = new Dispatcher;
