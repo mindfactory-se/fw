@@ -19,6 +19,8 @@
  */
 class SiteController extends Controller {
 
+    public $vHelpers = array('Html', 'Form');
+    
     public function  __construct() {
         parent::__construct();
         App::loadHelper('Html');

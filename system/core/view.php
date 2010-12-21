@@ -29,6 +29,14 @@ class View extends Object {
     private $data = array();
 
     /**
+     * Contains all helpers needed in the view.
+     *
+     * @access protected
+     * @var array
+     */
+    private $helpers = array();
+
+    /**
      * Contains all variables needed in the view.
      *
      * @access protected
@@ -57,6 +65,7 @@ class View extends Object {
         $this->viewVars = $controller->viewVars;
         $this->appLayout = $controller->appLayout;
         $this->layout = $controller->layout;
+        $this->helpers = $controller->vHelpers;
     }
 
     /**
@@ -84,29 +93,47 @@ class View extends Object {
      */
     public function render($path) {
 
+        $this->triggerHelpers();
+        // Render view
         if (empty($path)) {
             $path = '/apps/' . App::get('sys.route.app') . '/views/' . App::get('sys.route.controller') . '/' . App::get('sys.route.action') . '.php';
         }
-        ob_start();
-        App::loadFile($path, $this->viewVars);
-        $this->set(array('viewContent' => ob_get_contents()));
+        $this->set(array('viewContent' => $this->loadView($path)));
         ob_end_clean();
-
-        // Render mod layout
-        $path = '/layouts/' . App::get('sys.route.app') . '/' . $this->appLayout . '.php';
-        ob_start();
-        App::loadFile($path, $this->viewVars);
-        $this->set(array('content' => ob_get_contents()));
-        ob_end_clean();
-
+        
         // Render app layout
-        $path = '/layouts/' . $this->layout . '.php';
-        ob_start();
-        App::loadFile($path, $this->viewVars);
-        $output = ob_get_contents();
+        $path = '/layouts/' . App::get('sys.route.app') . '/' . $this->appLayout . '.php';
+        $this->set(array('content' => $this->loadView($path)));
         ob_end_clean();
-
+        
+        // Render site layout
+        $path = '/layouts/' . $this->layout . '.php';
+        $output = $this->loadView($path);
+        ob_end_clean();
+        
         echo $output;
+    }
+
+    private function loadView($path) {
+        extract($this->viewVars);
+        ob_start();
+        if (file_exists(SITE_PATH . $path)) {
+            include(SITE_PATH . $path);
+        } elseif (file_exists(SYS_PATH . $path)) {
+            include(SYS_PATH . $path);
+        }
+        //App::loadFile($path, $this->viewVars);
+        return ob_get_contents();
+    }
+
+    private function triggerHelpers() {
+        
+        foreach ($this->helpers as $helper) {
+            $this->{strtolower($helper)} = new $helper;
+            foreach ($this->{strtolower($helper)}->helpers as $helper2) {
+                $this->{strtolower($helper)}->{strtolower($helper2)} = new $helper2;
+            }
+        }
     }
 }
 ?>

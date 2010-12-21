@@ -1,19 +1,19 @@
-<?php HTML::docType()?>
+<?php $this->html->docType()?>
 
 <html>
     <head>
-        <?php echo Html::charset()?>
+        <?php echo $this->html->charset()?>
         
-        <?php echo Html::css('reset')?>
+        <?php echo $this->html->css('reset')?>
 
-        <?php echo Html::css('p12t')?>
+        <?php echo $this->html->css('p12t')?>
         
         <title></title>
     </head>
     <body>
         <div id="page-container">
             <div id="header">
-                <?php echo Html::a('/', Html::img('p12t/logo.png', 'p12t logo'))?>
+                <?php echo $this->html->a('/', Html::img('p12t/logo.png', 'p12t logo'))?>
 
             </div>
             <div id="nav-top-container">
@@ -21,7 +21,7 @@
 
                 </div>
                 <div id="nav-breadcrump">
-                    <?php echo Html::a('/', 'Home'); ?>
+                    <?php echo $this->html->a('/', 'Home'); ?>
                 </div>
             </div>
             <div id="main-container">

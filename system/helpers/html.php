@@ -28,11 +28,11 @@ class Html extends Vhelper {
      * @param array $options Options as name, value pairs.
      * @return string Link tag.
      */
-    public static function a($href, $title, $options = array()) {
-        if (!Html::isExternalUrl($href)) {
+    public function a($href, $title, $options = array()) {
+        if (!$this->isExternalUrl($href)) {
             $url = App::get('sys.route.base') . $href;
         }
-        return '<a href="' . $href . '"' . Html::buildOptionsString($options) . '>' . $title .'</a>';
+        return '<a href="' . $href . '"' . $this->buildOptionsString($options) . '>' . $title .'</a>';
     }
 
     /**
@@ -42,8 +42,8 @@ class Html extends Vhelper {
      * @param string $path Path to css file
      * @return string CSS link tag.
      */
-    public static function css($path) {
-        if (!Html::isExternalUrl($path)) {
+    public function css($path) {
+        if (!$this->isExternalUrl($path)) {
             $path = App::get('sys.route.base') . '/css/' . $path . '.css';
         }
         return sprintf('<link rel="stylesheet" type="text/css" href="%s" />', $path);
@@ -56,7 +56,7 @@ class Html extends Vhelper {
      * @param string $charset Charset to be set.
      * @return string Charset tag.
      */
-    public static function charset($charset = 'uft-8') {
+    public function charset($charset = 'uft-8') {
         return sprintf('<meta http-equiv="Content-Type" content="text/html; charset=%s" />', $charset);
     }
 
@@ -67,7 +67,7 @@ class Html extends Vhelper {
      * @param string $type Tupe of doctype to be set.
      * @return string Doctype tag.
      */
-    public static function docType($type = 'xhtml-strict') {
+    public function docType($type = 'xhtml-strict') {
         switch ($type) {
             case 'html':
                 return '';
@@ -105,11 +105,11 @@ class Html extends Vhelper {
      * @param array $options Options as name, value pairs.
      * @return string Image tag.
      */
-    public static function img($src, $alt = '', $options = array()) {
-        if (!Html::isExternalUrl($src)) {
+    public function img($src, $alt = '', $options = array()) {
+        if (!$this->html->isExternalUrl($src)) {
             $src = App::get('sys.route.base') . '/img/' . $src;
         }
-        return '<img src="' . $src . '" alt="' . $alt . '"' . HTML::buildOptionsString($options) . ' />';
+        return '<img src="' . $src . '" alt="' . $alt . '"' . $this->html->buildOptionsString($options) . ' />';
     }
 
     /**
@@ -118,8 +118,8 @@ class Html extends Vhelper {
      * @access public
      * @see Html::img()
      */
-    public static function image($src, $alt = '', $options = array()) {
-        Html::img($src, $alt, $options);
+    public function image($src, $alt = '', $options = array()) {
+        $this->img($src, $alt, $options);
     }
 
     /**
@@ -128,8 +128,8 @@ class Html extends Vhelper {
      * @access public
      * @see Html::a()
      */
-    public static function link($title, $url, $options = array()) {
-        html::a($title, $url, $options);
+    public function link($title, $url, $options = array()) {
+        $this->a($title, $url, $options);
     }
 
 }

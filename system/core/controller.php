@@ -58,8 +58,22 @@ class Controller extends Object {
      */
     public $layout = 'default';
 
+    /**
+     * Viev helpers to be loaded.
+     *
+     * @var array
+     */
+    public $vHelpers = array();
+
     public function  __construct() {
         parent::__construct();
+    }
+
+    protected function mergeHelpers() {
+        $siteVars = get_class_vars('SiteController');
+        $appVars = get_class_vars('App' . App::get('sys.route.app') . 'Controller');
+        //print_r($siteVars);
+        $this->vHelpers = array_unique(array_merge($siteVars['vHelpers'], $appVars['vHelpers'], $this->vHelpers));        
     }
 
     /**
@@ -74,6 +88,7 @@ class Controller extends Object {
 
     protected function render($path = '') {
 
+        $this->mergeHelpers();
         $this->view = new View($this);
         $this->view->render($path);
 

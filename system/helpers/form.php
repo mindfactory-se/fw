@@ -19,14 +19,8 @@
  */
 class Form extends Vhelper {
 
-    /**
-     * Load dependent helpers
-     *
-     * @access public
-     */
     public function  __construct() {
         parent::__construct();
-        App::loadHelper('Html');
     }
 
     /**
@@ -36,8 +30,8 @@ class Form extends Vhelper {
      * @param array $options
      * @return type
      */
-    public static function button($value, $options = array()) {
-        return Form::formatButton($value, 'button', $options);
+    public function button($value, $options = array()) {
+        return $this->formatButton($value, 'button', $options);
     }
 
     /**
@@ -48,9 +42,9 @@ class Form extends Vhelper {
      * @param array $options
      * @return string
      */
-    public static function checkbox($name, $value, $options = array()) {
+    public function checkbox($name, $value, $options = array()) {
         $name = explode('.', $name);
-        return sprintf('<input type="checkbox" name="data[%s][%s][%s][]" value="%s"%s />', $name[0], $name[1], $name[2], $value, Form::buildOptionsString($options));
+        return sprintf('<input type="checkbox" name="data[%s][%s][%s][]" value="%s"%s />', $name[0], $name[1], $name[2], $value, $this->buildOptionsString($options));
     }
     
     /**
@@ -60,9 +54,9 @@ class Form extends Vhelper {
      * @param array $options Options as name, value pairs.
      * @return string Form tag.
      */
-    public static function create($action = NULL, $options = array()) {
+    public function create($action = NULL, $options = array()) {
         if (!$action) $action = App::get ('sys.route.visible');
-        return sprintf('<form action="/%s" method="POST"%s>', $action, Form::buildOptionsString($options));
+        return sprintf('<form action="/%s" method="POST"%s>', $action, $this->buildOptionsString($options));
     }
 
     /**
@@ -90,7 +84,7 @@ class Form extends Vhelper {
      * @return string
      */
     public static function file($name, $options = array()) {
-        return Form::formatInput($name, 'file', $options);
+        return $this->formatInput($name, 'file', $options);
     }
 
     /**
@@ -100,8 +94,8 @@ class Form extends Vhelper {
      * @param <type> $options
      * @return <type>
      */
-    private static function formatButton($value, $type, $options) {
-        return sprintf('<input type="%s" value="%s"%s />', $type, $value, Form::buildOptionsString($options));
+    private function formatButton($value, $type, $options) {
+        return sprintf('<input type="%s" value="%s"%s />', $type, $value, $this->buildOptionsString($options));
     }
 
     /**
@@ -111,9 +105,9 @@ class Form extends Vhelper {
      * @param array $options
      * @return string
      */
-    private static function formatInput($name, $type, $options) {
+    private function formatInput($name, $type, $options) {
         $name = explode('.', $name);
-        return sprintf('<input type="%s" name="data[%s][%s][%s]"%s />', $type, $name[0], $name[1], $name[2], Form::buildOptionsString($options));
+        return sprintf('<input type="%s" name="data[%s][%s][%s]"%s />', $type, $name[0], $name[1], $name[2], $this->buildOptionsString($options));
     }
 
     /**
@@ -123,8 +117,8 @@ class Form extends Vhelper {
      * @param array $options
      * @return string
      */
-    public static function hidden($name, $options = array()) {
-        return Form::formatInput($name, 'hidden', $options);
+    public  function hidden($name, $options = array()) {
+        return $this->formatInput($name, 'hidden', $options);
     }
 
     /**
@@ -134,7 +128,7 @@ class Form extends Vhelper {
      * @param array $options
      * @return string
      */
-    public static function image($src, $options = array()){
+    public function image($src, $options = array()){
         if (!Html::isExternalUrl($src)) {
             $name[0] = App::get('sys.route.base') . '/img/' . $src;
         }
@@ -148,8 +142,8 @@ class Form extends Vhelper {
      * @param array $options
      * @return string
      */
-    public static function password($name, $options = array()) {
-        return Form::formatInput($name, 'password', $options);
+    public function password($name, $options = array()) {
+        return $this->formatInput($name, 'password', $options);
     }
 
     /**
@@ -160,9 +154,9 @@ class Form extends Vhelper {
      * @param array $options
      * @return string
      */
-    public static function radio($name, $value, $options = array()) {
+    public function radio($name, $value, $options = array()) {
         $name = explode('.', $name);
-        return sprintf('<input type="radio" name="data[%s][%s][%s]" value="%s"%s />', $name[0], $name[1], $name[2], $value, Form::buildOptionsString($options));
+        return sprintf('<input type="radio" name="data[%s][%s][%s]" value="%s"%s />', $name[0], $name[1], $name[2], $value, $this->buildOptionsString($options));
     }
 
     /**
@@ -172,8 +166,8 @@ class Form extends Vhelper {
      * @param array $options
      * @return string
      */
-    public static function reset($value, $options = array()) {
-        return Form::formatButton($value, 'reset', $options);
+    public function reset($value, $options = array()) {
+        return $this->formatButton($value, 'reset', $options);
     }
 
     /**
@@ -185,7 +179,7 @@ class Form extends Vhelper {
      * @param array $options
      * @return string
      */
-    public static function select($name, $data, $multiple = false, $options = array()) {
+    public function select($name, $data, $multiple = false, $options = array()) {
         $name = explode('.', $name);
         $multipleExtra = '';
         if ($multiple) {
@@ -193,7 +187,7 @@ class Form extends Vhelper {
             $multipleExtra = '[]';
         }
         $buffer = '';
-        $buffer .= sprintf('<select name="data[%s][%s][%s]%s"%s%s>' , $name[0], $name[1], $name[2], $multipleExtra, $multiple, Form::buildOptionsString($options));
+        $buffer .= sprintf('<select name="data[%s][%s][%s]%s"%s%s>' , $name[0], $name[1], $name[2], $multipleExtra, $multiple, $this->buildOptionsString($options));
         $buffer .= "\n";
         foreach ($data as $key => $value) {
             $buffer .= sprintf('<option value="%s">%s</option>', $value, $key);
@@ -210,8 +204,8 @@ class Form extends Vhelper {
      * @param array $options
      * @return string
      */
-    public static function submit($value, $options = array()) {
-        return Form::formatButton($value, 'submit', $options);
+    public function submit($value, $options = array()) {
+        return $this->formatButton($value, 'submit', $options);
     }
 
     /**
@@ -220,8 +214,8 @@ class Form extends Vhelper {
      * @param array $options
      * @return string
      */
-    public static function text($name, $options = array()) {
-        return Form::formatInput($name, 'text', $options);
+    public function text($name, $options = array()) {
+        return $this->formatInput($name, 'text', $options);
     }
 
     /**
@@ -232,10 +226,10 @@ class Form extends Vhelper {
      * @param array $options
      * @return string
      */
-    public static function textarea($name, $content = '', $options = array()) {
+    public function textarea($name, $content = '', $options = array()) {
         $name = explode('.', $name);
         $buffer = '';
-        $buffer .= sprintf('<textarea name="data[%s][%s][%s]"%s>' , $name[0], $name[1], $name[2], Form::buildOptionsString($options));
+        $buffer .= sprintf('<textarea name="data[%s][%s][%s]"%s>' , $name[0], $name[1], $name[2], $this->buildOptionsString($options));
         $buffer .= $content;
         $buffer .= "</textarea>";
         return $buffer;

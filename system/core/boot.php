@@ -35,5 +35,32 @@ $p12t->run();
  * @param string $name Name of class to include
  */
 function __autoload($name) {
-    include SYS_PATH . '/core/' . strtolower($name) . '.php';
+    if (loadFile('/core/' . strtolower($name) . '.php')) return true;
+    if (loadFile('/helpers/' . strtolower($name) . '.php')) return true;
+    if (loadFile('/apps/' . strtolower($name) . '.php')) return true;
+    if (loadFile('/apps/system/' . strtolower($name) . '.php')) return true;
+}
+
+  /**
+     * Try to load the file in the give path.
+     *
+     * First try to require the file frome the application folder. If that's not
+     * successfull try to require the file from the system folder insted.
+     *
+     * @access public
+     * @param string $path Holdes the path to the file to be loaded.
+     * @return boolean Returns true if file requierd sucessfully.
+     */
+function loadFile($path) {
+
+    // Load the file. First try from site and second from system.
+    if (file_exists(SITE_PATH . $path)) {
+        require_once(SITE_PATH . $path);
+        return true;
+    } elseif (file_exists(SYS_PATH . $path)) {
+        require_once(SYS_PATH . $path);
+        return true;
+    } else {
+        return false;
+    }
 }

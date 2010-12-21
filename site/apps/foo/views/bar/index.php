@@ -1,20 +1,20 @@
 <p><pre>
     <?php print_r($msg) ?>
 </pre>
-    <?= Form::create('foo/bar/index', array('test'=>'yahh')); ?>
+    <?= $this->form->create('foo/bar/index', array('test'=>'yahh')); ?>
     
-    <p>Title: <?= Form::text('foo.bar.title'); ?><p />
+    <p>Title: <?= $this->form->text('foo.bar.title'); ?><p />
     <p>
         Text:
-        <?= Form::textarea('foo.bar.text'); ?>
+        <?= $this->form->textarea('foo.bar.text'); ?>
     
     <p />
     <p>
-        <?= Form::submit('Submit'); ?>
+        <?= $this->form->submit('Submit'); ?>
 
-        <?= Form::reset('Reset'); ?>
+        <?= $this->form->reset('Reset'); ?>
     </p>
 
-    <?= Form::end() ?>
+    <?= $this->form->end() ?>
 
 </p>

@@ -26,7 +26,7 @@ class Vhelper extends Helper {
      * @param array $options Options as name, value pairs.
      * @return string
      */
-    protected static function buildOptionsString($options) {
+    protected function buildOptionsString($options) {
         $option = '';
         foreach($options as $key => $field) {
                 $option .= ' ' . $key . '="' . $field . '"';
@@ -41,7 +41,7 @@ class Vhelper extends Helper {
      * @param string $url URl to be checked.
      * @return bool True if URL is external.
      */
-    protected static function isExternalUrl($url) {
+    protected function isExternalUrl($url) {
         if (strpos($url, '://') > 0) {
             return true;
         }

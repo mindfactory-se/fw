@@ -17,6 +17,8 @@
  */
 class FooBarController extends AppFooController {
 
+    public $vHelpers = array('Form');
+
     public function  __construct() {
         parent::__construct();
         App::loadHelper('form');

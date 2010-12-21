@@ -1,8 +1,8 @@
-<?php HTML::docType()?>
+<?php $this->html->docType()?>
 
 <html>
     <head>
-        <?php echo Html::charset()?>
+        <?php echo $this->html->charset()?>
 
         <title></title>
     </head>
