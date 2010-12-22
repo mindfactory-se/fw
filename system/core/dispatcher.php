@@ -92,8 +92,8 @@ class Dispatcher extends Object {
      */
     private function checkControllers() {
 
-        $fileName = '/apps/' . App::get('sys.route.app') . '/controllers/' . App::get('sys.route.app') . '_' . App::get('sys.route.controller') . '_controller';
-        if (!file_exists(\SITE_PATH . $fileName) OR \file_exists(\APP_PATH . $fileName)) {
+        $fileName = '/apps/' . App::get('sys.route.app') . '/controllers/' . App::get('sys.route.app') . '_' . App::get('sys.route.controller') . '_controller.php';
+        if (!file_exists(\SITE_PATH . $fileName) AND !file_exists(\SYS_PATH . $fileName)) {
             App::set('sys.route.app', 'system');
             App::set('sys.route.controller', 'errors');
             App::set('sys.route.action', 'e404');
