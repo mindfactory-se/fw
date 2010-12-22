@@ -19,8 +19,6 @@ namespace p12t\core;
  */
 class View extends Object {
 
-    private $controller;
-
 
     /**
      * Contains data posted with form.
@@ -64,10 +62,7 @@ class View extends Object {
 
     public function  __construct(&$controller) {
         parent::__construct();
-        $this->viewVars = $controller->viewVars;
-        $this->appLayout = $controller->appLayout;
-        $this->layout = $controller->layout;
-        $this->helpers = $controller->vHelpers;
+        $this->controller =& $controller;
     }
 
     /**
@@ -80,7 +75,7 @@ class View extends Object {
      * @param mixed $params
      */
     protected function set($params) {
-        $this->viewVars = array_merge($this->viewVars, $params);
+        $this->controller->viewVars = array_merge($this->viewVars, $params);
     }
 
     /**
@@ -104,12 +99,12 @@ class View extends Object {
         ob_end_clean();
         
         // Render app layout
-        $path = '/layouts/' . App::get('sys.route.app') . '/' . $this->appLayout . '.php';
-        $this->set(array('content' => $this->loadView($path)));
+        $path = '/layouts/' . App::get('sys.route.app') . '/' . $this->controller->appLayout . '.php';
+        $this->controller->set(array('content' => $this->loadView($path)));
         ob_end_clean();
         
         // Render site layout
-        $path = '/layouts/' . $this->layout . '.php';
+        $path = '/layouts/' . $this->controller->layout . '.php';
         $output = $this->loadView($path);
         ob_end_clean();
         
@@ -117,25 +112,24 @@ class View extends Object {
     }
 
     private function loadView($path) {
-        extract($this->viewVars);
+        extract($this->controller->viewVars);
         ob_start();
         if (file_exists(SITE_PATH . $path)) {
             include(SITE_PATH . $path);
         } elseif (file_exists(SYS_PATH . $path)) {
             include(SYS_PATH . $path);
         }
-        //App::loadFile($path, $this->viewVars);
         return ob_get_contents();
     }
 
     private function triggerHelpers() {
         
-        foreach ($this->helpers as $helper) {
+        foreach ($this->controller->vHelpers as $helper) {
             $helperClass = '\\p12t\\helpers\\' . $helper;
-            $this->{strtolower($helper)} = new $helperClass;
-            foreach ($this->{strtolower($helper)}->helpers as $helper2) {
-                $helper2 = '\\p12t\\helpers\\' . $helper2;
-                $this->{strtolower($helper)}->{strtolower($helper2)} = new $helper2;
+            $this->{strtolower($helper)} = new $helperClass($this->controller);
+            foreach ($this->{strtolower($helper)}->vHelpers as $helper2) {
+                $helperClass = '\\p12t\\helpers\\' . $helper2;
+                $this->{strtolower($helper)}->{strtolower($helper2)} = new $helperClass($this->controller);
             }
         }
     }

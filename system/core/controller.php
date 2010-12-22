@@ -104,7 +104,7 @@ class Controller extends Object {
      * @access protected
      * @param mixed $params
      */
-    protected function set($params) {
+    public function set($params) {
         $this->viewVars = array_merge($this->viewVars, $params);
     }
 }

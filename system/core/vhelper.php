@@ -20,6 +20,8 @@ namespace p12t\core;
  */
 class Vhelper extends Helper {
 
+    public $vHelpers = array();
+
     /**
      * Builds a string of options to put in a tag.
      *

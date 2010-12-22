@@ -27,5 +27,10 @@ class Helper extends Object {
      * @var array
      */
     public $helpers = array();
+
+    public function __construct(&$controller) {
+        parent::__construct();
+        $this->controller =& $controller;
+    }
 }
 ?>

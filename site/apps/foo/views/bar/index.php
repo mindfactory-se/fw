@@ -10,6 +10,9 @@
     
     <p />
     <p>
+        <?= $this->form->select('foo.bar.select', array('L1'=>'V1', 'L2'=>'V2', 'L3'=>'V3'), true) ?>
+    </p>
+    <p>
         <?= $this->form->submit('Submit'); ?>
 
         <?= $this->form->reset('Reset'); ?>
