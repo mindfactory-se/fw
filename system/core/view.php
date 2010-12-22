@@ -1,5 +1,7 @@
 <?php
 
+namespace p12t\core;
+
 /**
  * p12t PHP Framework : /system/core/view.php
  *
@@ -129,8 +131,10 @@ class View extends Object {
     private function triggerHelpers() {
         
         foreach ($this->helpers as $helper) {
-            $this->{strtolower($helper)} = new $helper;
+            $helperClass = '\\p12t\\helpers\\' . $helper;
+            $this->{strtolower($helper)} = new $helperClass;
             foreach ($this->{strtolower($helper)}->helpers as $helper2) {
+                $helper2 = '\\p12t\\helpers\\' . $helper2;
                 $this->{strtolower($helper)}->{strtolower($helper2)} = new $helper2;
             }
         }

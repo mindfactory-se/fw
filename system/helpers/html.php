@@ -1,5 +1,7 @@
 <?php
 
+namespace p12t\helpers;
+
 /**
  * p12t PHP Framework : /system/helpers/view/html.php
  *
@@ -17,7 +19,7 @@
  * @since 0.1.0
  * @access public
  */
-class Html extends Vhelper {
+class Html extends \p12t\core\Vhelper {
 
     /**
      * Makes a hypertext link tag.
@@ -30,7 +32,7 @@ class Html extends Vhelper {
      */
     public function a($href, $title, $options = array()) {
         if (!$this->isExternalUrl($href)) {
-            $url = App::get('sys.route.base') . $href;
+            $url = \p12t\core\App::get('sys.route.base') . $href;
         }
         return '<a href="' . $href . '"' . $this->buildOptionsString($options) . '>' . $title .'</a>';
     }
@@ -44,7 +46,7 @@ class Html extends Vhelper {
      */
     public function css($path) {
         if (!$this->isExternalUrl($path)) {
-            $path = App::get('sys.route.base') . '/css/' . $path . '.css';
+            $path = \p12t\core\App::get('sys.route.base') . '/css/' . $path . '.css';
         }
         return sprintf('<link rel="stylesheet" type="text/css" href="%s" />', $path);
     }
@@ -106,10 +108,10 @@ class Html extends Vhelper {
      * @return string Image tag.
      */
     public function img($src, $alt = '', $options = array()) {
-        if (!$this->html->isExternalUrl($src)) {
-            $src = App::get('sys.route.base') . '/img/' . $src;
+        if (!$this->isExternalUrl($src)) {
+            $src = \p12t\core\App::get('sys.route.base') . '/img/' . $src;
         }
-        return '<img src="' . $src . '" alt="' . $alt . '"' . $this->html->buildOptionsString($options) . ' />';
+        return '<img src="' . $src . '" alt="' . $alt . '"' . $this->buildOptionsString($options) . ' />';
     }
 
     /**

@@ -1,5 +1,7 @@
 <?php
 
+namespace p12t\apps\cms\controllers;
+
 /**
  * p12t PHP Framework : /system/mods/cms/controllers/cms_db_controller.php
  *
@@ -16,7 +18,7 @@
  * @access public
  */
 
-class CmsDbController extends AppCmsController {
+class CmsDbController extends \p12t\apps\cms\AppCmsController {
 
     public function  __construct() {
         parent::__construct();

@@ -17,15 +17,15 @@
 error_reporting(E_ALL);
 
 // Start up Benchmark as soon as possible.
-Benchmark::set('Start');
+//p12t\core\Benchmark::set('Start');
 
 // Set some system values
-App::set('sys.version', '0.2.0');
-App::set('sys.name', 'p12t Framework');
-App::set('sys.fullname', 'Pay If Yoy Like It Framework');
+//App::set('sys.version', '0.2.0');
+//App::set('sys.name', 'p12t Framework');
+//App::set('sys.fullname', 'Pay If Yoy Like It Framework');
 
 // Invoke the dispather class and run the framework.
-$p12t = new Dispatcher;
+$p12t = new p12t\core\Dispatcher;
 $p12t->run();
 
 /**
@@ -35,10 +35,8 @@ $p12t->run();
  * @param string $name Name of class to include
  */
 function __autoload($name) {
-    if (loadFile('/core/' . strtolower($name) . '.php')) return true;
-    if (loadFile('/helpers/' . strtolower($name) . '.php')) return true;
-    if (loadFile('/apps/' . strtolower($name) . '.php')) return true;
-    if (loadFile('/apps/system/' . strtolower($name) . '.php')) return true;
+    $name = makeUnderScore($name);
+    loadFile('/' . str_replace(array('p12t\\', '\\'), array('', '/'), strtolower($name)) . '.php');
 }
 
   /**
@@ -52,7 +50,7 @@ function __autoload($name) {
      * @return boolean Returns true if file requierd sucessfully.
      */
 function loadFile($path) {
-
+    //echo SITE_PATH . $path . '<br />';
     // Load the file. First try from site and second from system.
     if (file_exists(SITE_PATH . $path)) {
         require_once(SITE_PATH . $path);
@@ -63,4 +61,19 @@ function loadFile($path) {
     } else {
         return false;
     }
+}
+
+function makeUnderScore($str) {
+    return strtolower(preg_replace('/(?<=[a-z])([A-Z])/', '_$1', $str));
+}
+
+function makeCamelCase($str) {
+  $words = explode('_', strtolower($str));
+
+  $return = '';
+  foreach ($words as $word) {
+    $return .= ucfirst(trim($word));
+  }
+
+  return $return;
 }

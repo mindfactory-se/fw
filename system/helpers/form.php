@@ -1,5 +1,7 @@
 <?php
 
+namespace p12t\helpers;
+
 /**
  * p12t PHP Framework : /system/helpers/view/form.php
  *
@@ -17,7 +19,7 @@
  * @since 0.2.0
  * @access public
  */
-class Form extends Vhelper {
+class Form extends \p12t\core\Vhelper {
 
     public function  __construct() {
         parent::__construct();

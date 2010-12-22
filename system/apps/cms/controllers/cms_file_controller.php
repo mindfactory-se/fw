@@ -1,5 +1,7 @@
 <?php
 
+namespace p12t\apps\cms\controllers;
+
 /**
  * p12t PHP Framework : /system/mods/cms/controllers/cms_static_controller.php
  *
@@ -15,7 +17,7 @@
  * @since 0.1.0
  * @access public
  */
-class CmsFileController extends AppCmsController {
+class CmsFileController extends \p12t\apps\cms\AppCmsController {
 
     public function  __construct() {
         parent::__construct();

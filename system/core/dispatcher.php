@@ -1,5 +1,7 @@
 <?php
 
+namespace p12t\core;
+
 /**
  * p12t PHP Framework : /system/core/dispatcher.php
  *
@@ -48,9 +50,16 @@ class Dispatcher extends Object {
      */
     public function run() {
 
+        Benchmark::set('Start');
+
+        // Set some system values
+        App::set('sys.version', '0.2.0');
+        App::set('sys.name', 'p12t Framework');
+        App::set('sys.fullname', 'Pay If Yoy Like It Framework');
+
         $this->loadRequierdFiles();
         Router::match();
-        $this->loadControllers();
+        $this->checkControllers();
         $this->createController();
         if (isset($_POST['data'])) $this->controller->data = $_POST['data'];
         $this->invokeAction();
@@ -71,9 +80,6 @@ class Dispatcher extends Object {
     private function loadRequierdFiles() {
         App::loadSettings('router');
         App::loadSettings('config/default');
-        App::load('apps/site_controller');
-        App::load('apps/system/app_system_controller');
-        App::load('apps/site_model');
     }
 
     /**
@@ -84,19 +90,10 @@ class Dispatcher extends Object {
      *
      * @access private
      */
-    private function loadControllers() {
-        if (!App::loadController(App::get('sys.route.app') .'/app_' . App::get('sys.route.app') . '_controller')) {
-            App::loadController('system/app_system_controller');
-            App::set('sys.route.app', 'system');
-            App::set('sys.route.controller', 'errors');
-            App::set('sys.route.action', 'e404');
-            App::set('sys.route.params', array(str_replace('/', '.', App::get('sys.route.visible'))));
-        }
-        
-        if (!App::loadController(App::get('sys.route.app') . '/controllers/' . App::get('sys.route.app') . '_' . App::get('sys.route.controller') . '_controller')) {
-            //$this->redirect('/system/errors/e404/' . str_replace('/', '.', App::get('sys.route.internal')));
-            App::loadController('system/app_system_controller');
-            App::loadController('system/controllers/system_errors_controller');
+    private function checkControllers() {
+
+        $fileName = '/apps/' . App::get('sys.route.app') . '/controllers/' . App::get('sys.route.app') . '_' . App::get('sys.route.controller') . '_controller';
+        if (!file_exists(\SITE_PATH . $fileName) OR \file_exists(\APP_PATH . $fileName)) {
             App::set('sys.route.app', 'system');
             App::set('sys.route.controller', 'errors');
             App::set('sys.route.action', 'e404');
@@ -111,13 +108,11 @@ class Dispatcher extends Object {
      */
     private function createController() {
         //Create the controller object.
-        $this->controllerName = ucfirst(App::get('sys.route.app')) . ucfirst(App::get('sys.route.controller')) . 'Controller';
+        $this->controllerName = '\\p12t\\apps\\' . App::get('sys.route.app') . '\\controllers\\' . ucfirst(App::get('sys.route.app')) . ucfirst(App::get('sys.route.controller')) . 'Controller';
         $this->controller = new $this->controllerName;
 
         if (!method_exists($this->controller, App::get('sys.route.action'))) {
-            App::loadController('system/app_system_controller');
-            App::loadController('system/controllers/system_errors_controller');
-            $this->controller = new SystemErrorsController;
+            $this->controller = new \p12t\apps\system\controllers\SystemErrorsController;
             App::set('sys.route.app', 'system');
             App::set('sys.route.controller', 'errors');
             App::set('sys.route.action', 'e404');

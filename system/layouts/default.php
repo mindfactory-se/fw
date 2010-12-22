@@ -13,7 +13,7 @@
     <body>
         <div id="page-container">
             <div id="header">
-                <?php echo $this->html->a('/', Html::img('p12t/logo.png', 'p12t logo'))?>
+                <?php echo $this->html->a('/', $this->html->img('p12t/logo.png', 'p12t logo'))?>
 
             </div>
             <div id="nav-top-container">

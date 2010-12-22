@@ -1,5 +1,6 @@
 <?php
 
+namespace p12t\apps;
 /**
  * p12t PHP Framework : /app/mods/app_controller.php
  *
@@ -17,12 +18,12 @@
  * @since 0.1.0
  * @access public
  */
-class SiteController extends Controller {
+class SiteController extends \p12t\core\Controller {
 
     public $vHelpers = array('Html', 'Form');
     
     public function  __construct() {
         parent::__construct();
-        App::loadHelper('Html');
+        \p12t\core\App::loadHelper('Html');
     }
 }

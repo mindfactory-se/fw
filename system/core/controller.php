@@ -1,5 +1,7 @@
 <?php
 
+namespace p12t\core;
+
 /**
  * p12t PHP Framework : /system/core/controller.php
  *
@@ -70,9 +72,8 @@ class Controller extends Object {
     }
 
     protected function mergeHelpers() {
-        $siteVars = get_class_vars('SiteController');
-        $appVars = get_class_vars('App' . App::get('sys.route.app') . 'Controller');
-        //print_r($siteVars);
+        $siteVars = get_class_vars('\\p12t\\apps\\SiteController');
+        $appVars = get_class_vars('\\p12t\\apps\\' . App::get('sys.route.app') . '\\App'. App::get('sys.route.app') . 'Controller');
         $this->vHelpers = array_unique(array_merge($siteVars['vHelpers'], $appVars['vHelpers'], $this->vHelpers));        
     }
 

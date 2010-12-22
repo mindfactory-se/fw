@@ -1,5 +1,7 @@
 <?php
 
+namespace p12t\core;
+
 /**
  * p12t PHP Framework : /system/core/object.php
  *

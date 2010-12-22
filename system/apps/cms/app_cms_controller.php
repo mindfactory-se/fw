@@ -1,5 +1,7 @@
 <?php
 
+namespace p12t\apps\cms;
+
 /**
  * p12t PHP Framework : /system/mods/cms/mod_cms_controller.php
  *
@@ -15,7 +17,7 @@
  * @since 0.1.0
  * @access public
  */
-class AppCmsController extends SiteController {
+class AppCmsController extends \p12t\apps\SiteController {
 
     public function  __construct() {
         parent::__construct();

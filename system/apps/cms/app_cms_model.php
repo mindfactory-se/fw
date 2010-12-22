@@ -1,5 +1,7 @@
 <?php
 
+namespace p12t\apps\cms;
+
 /**
  * p12t PHP Framework : /system/mods/cms/mod_cms_model.php
  *
@@ -15,7 +17,7 @@
  * @since 0.1.0
  * @access public
  */
-class AppCmsModel extends SiteModel {
+class AppCmsModel extends \p12t\apps\SiteModel {
 
     public function  __construct() {
         parent::__construct();

@@ -1,5 +1,6 @@
 <?php
 
+namespace p12t\apps\foo;
 /**
  * p12t PHP Framework : /app/mods/foo/mod_foo_bar_controller.php
  *
@@ -15,7 +16,7 @@
  * @since 0.1.0
  * @access public
  */
-class AppFooController extends SiteController {
+class AppFooController extends \p12t\apps\SiteController {
 
     public function  __construct() {
         parent::__construct();

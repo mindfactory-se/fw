@@ -1,5 +1,6 @@
 <?php
 
+namespace p12t\apps\system\controllers;
 /**
  * p12t PHP Framework : /system/mods/system/controllers/system_errors_controller.php
  *
@@ -15,7 +16,9 @@
  * @since 1.0
  * @access public
  */
-class SystemErrorsController extends AppSystemController{
+class SystemErrorsController extends \p12t\apps\system\AppSystemController {
+
+    public $helpers = array('Html');
 
     public function  __construct() {
         parent::__construct();
