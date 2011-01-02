@@ -39,18 +39,41 @@ class Model extends Object {
     /**
      * Holdes validation errors
      *
+     * @access public
      * @var array
+     * @since 0.2.0
      */
     public $validationErrors = array();
 
+    /**
+     *  Holdes refrens to controller::data
+     *
+     * @access public
+     * @var array
+     * @since 0.2.0
+     */
     public $data;
 
+    /**
+     * Gives access to controller::data and controller::validationsErrors
+     *
+     * @access public
+     * @param object Controllerobhect
+     * @since 0.2.0
+     */
     public function __construct(&$controller) {
         parent::__construct();
         $this->validationErrors =& $controller->validationErrors;
         $this->data =& $controller->data;
     }
 
+    /**
+     * Validates the given data.
+     *
+     * @access public
+     * @return bool True if data validates.
+     * @since 0.2.0
+     */
     public function validate() {
         foreach ($this->validation as $field => $rules) {
             foreach ($rules as $rule => $options) {
@@ -60,6 +83,14 @@ class Model extends Object {
         return (count($this->validationErrors) > 0) ? false : true;
     }
 
+    /**
+     * Sets a validation error message sortet by field.
+     *
+     * @access public
+     * @param string $field Field that contains an error.
+     * @param string $msg Error message.
+     * @since 0.2.0
+     */
     private function setValidationError($field, $msg) {
         $this->validationErrors[$field][] = $msg;
     }
@@ -68,6 +99,16 @@ class Model extends Object {
     // Below is the diffrent validation methods.
     // -----------------------------------------
 
+    /**
+     * Validates an alphanumeric field.
+     *
+     * Checks if a field contains numbers and letters.
+     *
+     * @access private
+     * @param string $field Name of field to validate.
+     * @param array $options ('Error message').
+     * @since 0.2.0
+     */
     private function alphaNumeric($field, $options) {
         $arrField = explode('.', $field);
         $data = (isset($this->data[$arrField[0]][$arrField[1]][$arrField[2]])) ? $this->data[$arrField[0]][$arrField[1]][$arrField[2]] : '';
@@ -76,6 +117,16 @@ class Model extends Object {
         }
     }
 
+    /**
+     * Validates an alphanumeric field.
+     *
+     * Checks if two fields contains the same value.
+     *
+     * @access private
+     * @param string $field Name of field to validate.
+     * @param array $options ('Fieldname 2', 'Error message').
+     * @since 0.2.0
+     */
     private function alike($field, $options) {
         $arrField = explode('.', $field);
         $arrField2 = explode('.', $options[0]);
@@ -84,13 +135,34 @@ class Model extends Object {
         if ($data != $data2) $this->setValidationError($field, $options[1]);
     }
 
+    /**
+     * Validates an boolean field.
+     *
+     * Checks if a field contains an boolean value.
+     *
+     * @access private
+     * @param string $field Name of field to validate.
+     * @param array $options ('Error message').
+     * @since 0.2.0
+     */
     function boolean($field, $options) {
         $arrField = explode('.', $field);
         $data = (isset($this->data[$arrField[0]][$arrField[1]][$arrField[2]])) ? $this->data[$arrField[0]][$arrField[1]][$arrField[2]] : '';
         $values = array(0, 1, '0', '1', true, false, 'true', 'false');
         if (!in_array($data, $values, true)) $this->setValidationError($field, $options[0]);
     }
-    
+
+    /**
+     * Validates an email field.
+     *
+     * Checks if a field contains a valid emailadress.
+     * Credits to {@link http://www.linuxjournal.com/article/9585}
+     *
+     * @access private
+     * @param string $field Name of field to validate.
+     * @param array $options ('Error message').
+     * @since 0.2.0
+     */
     private function email($field, $options) {
         $arrField = explode('.', $field);
         $email = (isset($this->data[$arrField[0]][$arrField[1]][$arrField[2]])) ? $this->data[$arrField[0]][$arrField[1]][$arrField[2]] : '';
@@ -135,7 +207,18 @@ class Model extends Object {
         }
         if (!$isValid) $this->setValidationError($field, $options[0]);
     }
-    
+
+    /**
+     * Validates if field values are in list.
+     *
+     * Usde primary in multiple fields or radiobuttons or other data that you
+     * wan't the user submitted data to be a certain value.
+     *
+     * @access private
+     * @param string $field Name of field to validate.
+     * @param array $options ('array of allowed values', 'Error message').
+     * @since 0.2.0
+     */
     private function inList($field, $options) {
         $arrField = explode('.', $field);
         $data = (isset($this->data[$arrField[0]][$arrField[1]][$arrField[2]])) ? $this->data[$arrField[0]][$arrField[1]][$arrField[2]] : array();
@@ -155,6 +238,17 @@ class Model extends Object {
         
     }
 
+    /**
+     * Validates an integer field.
+     *
+     * Checks if a field contains an integer value.
+     * Credits to {@link http://www.techbytes.ca/techbyte19.html}
+     *
+     * @access private
+     * @param string $field Name of field to validate.
+     * @param array $options ('Error message').
+     * @since 0.2.0
+     */
     private function integer($field, $options) {
         $arrField = explode('.', $field);
         $data = (isset($this->data[$arrField[0]][$arrField[1]][$arrField[2]])) ? $this->data[$arrField[0]][$arrField[1]][$arrField[2]] : 0;
@@ -166,6 +260,17 @@ class Model extends Object {
         }
     }
 
+    /**
+     * Validates the lenght of the field.
+     *
+     * Checks if a field contains the right lenght.
+     * If max is null the max lenght isen't checked.
+     *
+     * @access private
+     * @param string $field Name of field to validate.
+     * @param array $options ('Min lenght', 'Max lenght', 'Error message').
+     * @since 0.2.0
+     */
     private function lenght($field, $options) {
         $arrField = explode('.', $field);
         $data = (isset($this->data[$arrField[0]][$arrField[1]][$arrField[2]])) ? $this->data[$arrField[0]][$arrField[1]][$arrField[2]] : null;
@@ -180,6 +285,18 @@ class Model extends Object {
         }
     }
 
+    /**
+     * Validates an multipple field.
+     *
+     * Checks if the right number of optionse are selected.
+     * If max is 0 then max isen't checked.
+     *
+     * @access private
+     * @param string $field Name of field to validate.
+     * @param array $options ('Min', 'Max', 'Error message').
+     * @since 0.2.0
+     * @todo Change max to use null insted of 0
+     */
     private function multiple($field, $options) {
         $arrField = explode('.', $field);
         $data = (isset($this->data[$arrField[0]][$arrField[1]][$arrField[2]])) ? array_filter($this->data[$arrField[0]][$arrField[1]][$arrField[2]]) : null;
@@ -199,7 +316,15 @@ class Model extends Object {
             }
         }
     }
-    
+
+    /**
+     * Checks if a field contains value.
+     *
+     * @access private
+     * @param string $field Name of field to validate.
+     * @param array $options ('Error message').
+     * @since 0.2.0
+     */
     private function notEmpty($field, $options) {
         $arrField = explode('.', $field);
         $data = (isset($this->data[$arrField[0]][$arrField[1]][$arrField[2]])) ? $this->data[$arrField[0]][$arrField[1]][$arrField[2]] : null;
@@ -208,6 +333,16 @@ class Model extends Object {
         }
     }
 
+    /**
+     * Validates an numeric field.
+     *
+     * Checks if a field contains a numric value.
+     *
+     * @access private
+     * @param string $field Name of field to validate.
+     * @param array $options ('Error message').
+     * @since 0.2.0
+     */
     private function numeric($field, $options) {
         $arrField = explode('.', $field);
         $data = (isset($this->data[$arrField[0]][$arrField[1]][$arrField[2]])) ? $this->data[$arrField[0]][$arrField[1]][$arrField[2]] : null;
@@ -216,6 +351,17 @@ class Model extends Object {
         }
     }
 
+    /**
+     * Validates an numric fields range.
+     *
+     * Checks if a numric field is between two values.
+     * If min or max is null the value isen't cheked.
+     *
+     * @access private
+     * @param string $field Name of field to validate.
+     * @param array $options ('Min', 'Max', 'Error message').
+     * @since 0.2.0
+     */
     private function range($field, $options) {
         $arrField = explode('.', $field);
         $data = (isset($this->data[$arrField[0]][$arrField[1]][$arrField[2]])) ? $this->data[$arrField[0]][$arrField[1]][$arrField[2]] : null;
@@ -232,6 +378,16 @@ class Model extends Object {
         }
     }
 
+    /**
+     * Validates an field by submitted regex.
+     *
+     * A method to make an own validation.
+     *
+     * @access private
+     * @param string $field Name of field to validate.
+     * @param array $options ('Reg ex', 'Error message').
+     * @since 0.2.0
+     */
     private function regex($field, $options) {
         $arrField = explode('.', $field);
         $data = (isset($this->data[$arrField[0]][$arrField[1]][$arrField[2]])) ? $this->data[$arrField[0]][$arrField[1]][$arrField[2]] : null;
@@ -240,6 +396,17 @@ class Model extends Object {
         }
     }
 
+    /**
+     * Validates an url field.
+     *
+     * Checks if a field contains an valid url.
+     *
+     * @access private
+     * @param string $field Name of field to validate.
+     * @param array $options ('Error message').
+     * @since 0.2.0
+     * @todo Make it possible to choose more then one protocoll.
+     */
     private function url($field, $options) {
         $arrField = explode('.', $field);
         $data = (isset($this->data[$arrField[0]][$arrField[1]][$arrField[2]])) ? $this->data[$arrField[0]][$arrField[1]][$arrField[2]] : '';
