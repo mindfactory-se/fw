@@ -17,6 +17,7 @@ namespace p12t\core;
  *
  * @since 0.1.0
  * @access public
+ * @todo Change dns value
  */
 class Db {
     /**
@@ -58,7 +59,7 @@ class Db {
             $password = Config::get('db.' . $db . '.password');
 
             try {
-                self::$inctance[$db] = new PDO($dsn, $user, $password);
+                self::$inctance[$db] = new \PDO($dsn, $user, $password);
             } catch (PDOException $e) {
                 die("PDO CONNECTION ERROR: " . $e->getMessage() . "<br/>");
             }

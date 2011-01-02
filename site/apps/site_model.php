@@ -20,7 +20,4 @@ namespace p12t\apps;
  */
 class SiteModel extends \p12t\core\Model {
 
-    public function  __construct() {
-        parent::__construct();
-    }
 }

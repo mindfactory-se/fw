@@ -19,7 +19,4 @@ namespace p12t\apps\system;
  */
 class AppSystemController extends \p12t\apps\SiteController {
     
-    public function  __construct() {
-        parent::__construct();
-    }
 }

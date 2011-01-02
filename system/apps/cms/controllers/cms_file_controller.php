@@ -18,10 +18,6 @@ namespace p12t\apps\cms\controllers;
  * @access public
  */
 class CmsFileController extends \p12t\apps\cms\AppCmsController {
-
-    public function  __construct() {
-        parent::__construct();
-    }
     
     /**
      * Displays the requestetd static page.

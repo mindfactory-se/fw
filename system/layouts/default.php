@@ -1,19 +1,19 @@
-<?php $this->html->docType()?>
+<?= $this->html->docType()?>
 
 <html>
     <head>
-        <?php echo $this->html->charset()?>
+        <?= $this->html->charset()?>
         
-        <?php echo $this->html->css('reset')?>
+        <?= $this->html->css('reset')?>
 
-        <?php echo $this->html->css('p12t')?>
+        <?= $this->html->css('p12t')?>
         
         <title></title>
     </head>
     <body>
         <div id="page-container">
             <div id="header">
-                <?php echo $this->html->a('/', $this->html->img('p12t/logo.png', 'p12t logo'))?>
+                <?= $this->html->a('/', $this->html->img('p12t/logo.png', 'p12t logo'))?>
 
             </div>
             <div id="nav-top-container">
@@ -21,7 +21,7 @@
 
                 </div>
                 <div id="nav-breadcrump">
-                    <?php echo $this->html->a('/', 'Home'); ?>
+                    <? $this->html->a('/', 'Home'); ?>
                 </div>
             </div>
             <div id="main-container">
@@ -37,7 +37,7 @@
                         </ul>
                     </div>
                 </div>
-                <?php echo $content; ?>
+                <?= $content; ?>
 
             </div>
             <div id="footer" style="clear: both">

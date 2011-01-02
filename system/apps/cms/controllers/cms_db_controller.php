@@ -19,10 +19,6 @@ namespace p12t\apps\cms\controllers;
  */
 
 class CmsDbController extends \p12t\apps\cms\AppCmsController {
-
-    public function  __construct() {
-        parent::__construct();
-    }
     
     public function view($id = NULL) {
     $model = App::loadModel('cms.db');

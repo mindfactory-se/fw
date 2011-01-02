@@ -19,7 +19,4 @@ namespace p12t\apps\cms;
  */
 class AppCmsModel extends \p12t\apps\SiteModel {
 
-    public function  __construct() {
-        parent::__construct();
-    }
 }

@@ -41,9 +41,16 @@ class Form extends \p12t\core\Vhelper {
      * @return string
      */
     public function checkbox($name, $data, $options = array()) {
+        $buffer = '';
+        //echo 'ok';
+        if(isset($this->controller->validationErrors[$name])) {
+            $options['class'] = 'error';
+            foreach ($this->controller->validationErrors[$name] as $msg) {
+                $buffer .= "$msg<br />\n";
+            }
+        }
         $name = explode('.', $name);
         $count = 0;
-        $buffer = '';
         foreach ($data as $key => $value) {
             $checked = '';
             if (isset($this->controller->data[$name[0]][$name[1]][$name[2]][$count])) {
@@ -55,15 +62,7 @@ class Form extends \p12t\core\Vhelper {
             $buffer .= "\n";
             $count ++;
         }
-        /*$checked = '';
-        if (isset($this->controller->data[$name[0]][$name[1]][$name[2]])) {
-            foreach ($this->controller->data[$name[0]][$name[1]][$name[2]] as $item) {
-                $checked = ($item == $value) ? 'checked="true"' : '';
-            }
-        }
-        $buffer .= sprintf('<input type="hidden" name="data[%s][%s][%s][]" %s />', $name[0], $name[1], $name[2], $this->buildOptionsString($options));
-        $buffer .= sprintf('<input type="checkbox" name="data[%s][%s][%s][]" value="%s"%s%s />', $name[0], $name[1], $name[2], $value, $checked, $this->buildOptionsString($options));
-        */return $buffer;
+        return $buffer;
     }
     
     /**
@@ -125,10 +124,17 @@ class Form extends \p12t\core\Vhelper {
      * @return string
      */
     private function formatInput($name, $type, $options) {
+        $errorMsg = '';
+        if(isset($this->controller->validationErrors[$name])) {
+            $options['class'] = 'error';
+            foreach ($this->controller->validationErrors[$name] as $msg) {
+                $errorMsg .= "<br />$msg\n";
+            }
+        }
         $name = explode('.', $name);
         $options['value'] = (isset($options['value'])) ? $options['value'] : '';
         $options['value'] = (isset($this->controller->data[$name[0]][$name[1]][$name[2]])) ? $this->controller->data[$name[0]][$name[1]][$name[2]] : $options['value'];
-        return sprintf('<input type="%s" name="data[%s][%s][%s]"%s />', $type, $name[0], $name[1], $name[2], $this->buildOptionsString($options));
+        return sprintf('<input type="%s" name="data[%s][%s][%s]"%s />%s', $type, $name[0], $name[1], $name[2], $this->buildOptionsString($options), $errorMsg);
     }
 
     /**
@@ -139,7 +145,7 @@ class Form extends \p12t\core\Vhelper {
      * @return string
      */
     public function hidden($name, $value, $options = array()) {
-      $name = explode('.', $name);
+        $name = explode('.', $name);
         return sprintf('<input type="hidden" value="%s" name="data[%s][%s][%s]"%s />', $value, $name[0], $name[1], $name[2], $this->buildOptionsString($options));
     }
 
@@ -176,13 +182,26 @@ class Form extends \p12t\core\Vhelper {
      * @param array $options
      * @return string
      */
-    public function radio($name, $value, $options = array()) {
-        $name = explode('.', $name);
-        $checked = '';
-        if (isset($this->controller->data[$name[0]][$name[1]][$name[2]])) {
-            $checked = ($this->controller->data[$name[0]][$name[1]][$name[2]] == $value) ? 'checked="true"' : '';
+    public function radio($name, $data, $options = array()) {
+        $buffer = '';
+        if(isset($this->controller->validationErrors[$name])) {
+            $options['class'] = 'error';
+            foreach ($this->controller->validationErrors[$name] as $msg) {
+                $buffer .= "$msg<br />\n";
+            }
         }
-        return sprintf('<input type="radio" name="data[%s][%s][%s]" value="%s"%s%s />', $name[0], $name[1], $name[2], $value, $checked, $this->buildOptionsString($options));
+        $name = explode('.', $name);
+        $count = 0;
+        foreach ($data as $key => $value) {
+            $checked = '';
+            if (isset($this->controller->data[$name[0]][$name[1]][$name[2]])) {
+               $checked = ($this->controller->data[$name[0]][$name[1]][$name[2]] == $value) ? ' checked="true"' : '';
+            }
+            $buffer .= sprintf('<input type="radio" name="data[%s][%s][%s]" value="%s"%s%s />%s<br />', $name[0], $name[1], $name[2], $value, $checked, $this->buildOptionsString($options), $key);
+            $buffer .= "\n";
+            $count ++;
+        }
+        return $buffer;
     }
 
     /**
@@ -206,13 +225,19 @@ class Form extends \p12t\core\Vhelper {
      * @return string
      */
     public function select($name, $data, $multiple = false, $options = array()) {
+        $buffer = '';
+        if(isset($this->controller->validationErrors[$name])) {
+            $options['class'] = 'error';
+            foreach ($this->controller->validationErrors[$name] as $msg) {
+                $buffer .= "$msg<br />\n";
+            }
+        }
         $name = explode('.', $name);
         $multipleExtra = '';
         if ($multiple) {
             $multiple = ' multiple';
             $multipleExtra = '[]';
         }
-        $buffer = '';
         $buffer .= sprintf('<select name="data[%s][%s][%s]%s"%s%s>' , $name[0], $name[1], $name[2], $multipleExtra, $multiple, $this->buildOptionsString($options));
         $buffer .= "\n";
         foreach ($data as $key => $value) {
@@ -268,12 +293,19 @@ class Form extends \p12t\core\Vhelper {
      * @return string
      */
     public function textarea($name, $content = '', $options = array()) {
+        $errorMsg = '';
+        if(isset($this->controller->validationErrors[$name])) {
+            $options['class'] = 'error';
+            foreach ($this->controller->validationErrors[$name] as $msg) {
+                $errorMsg .= "<br />$msg\n";
+            }
+        }
         $name = explode('.', $name);
         $content = (isset($this->controller->data[$name[0]][$name[1]][$name[2]])) ? $this->controller->data[$name[0]][$name[1]][$name[2]] : $content;
         $buffer = '';
         $buffer .= sprintf('<textarea name="data[%s][%s][%s]"%s>' , $name[0], $name[1], $name[2], $this->buildOptionsString($options));
         $buffer .= $content;
-        $buffer .= "</textarea>";
+        $buffer .= "</textarea>$errorMsg";
         return $buffer;
     }
 }

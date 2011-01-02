@@ -19,10 +19,6 @@ namespace p12t\apps\system\controllers;
 class SystemErrorsController extends \p12t\apps\system\AppSystemController {
 
     public $helpers = array('Html');
-
-    public function  __construct() {
-        parent::__construct();
-    }
     
     /**
      * An 404 error action.

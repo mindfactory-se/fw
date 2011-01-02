@@ -36,10 +36,6 @@ class Dispatcher extends Object {
      */
     public $controllerName;
 
-    public function  __construct() {
-        parent::__construct();
-    }
-
     /**
      * Runs the framework
      *

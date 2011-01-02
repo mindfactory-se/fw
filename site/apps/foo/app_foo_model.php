@@ -18,7 +18,4 @@ namespace p12t\apps\foo;
  */
 class AppFooModel extends \p12t\apps\SiteModel {
 
-    public function  __construct() {
-        parent::__construct();
-    }
 }

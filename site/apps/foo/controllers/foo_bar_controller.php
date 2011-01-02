@@ -20,15 +20,51 @@ namespace p12t\apps\foo\controllers;
 class FooBarController extends \p12t\apps\foo\AppFooController {
 
     public $vHelpers = array('Form');
-
-    public function  __construct() {
-        parent::__construct();
-    }
     
     public function index() {
-        $fooBar = new \p12t\apps\foo\models\FooBarModel;
-        //$this->set(array('msg' => $fooBar->index()));
-        $this->set(array('msg' => $this->data));
+        $model = new \p12t\apps\foo\models\FooBarModel($this);
+        $this->set(array('items' => $model->index()));
         $this->render();
+    }
+
+    public function view($id) {
+        $model = new \p12t\apps\foo\models\FooBarModel($this);
+        $this->set(array('item' => $model->view($id)));
+        $this->render();
+    }
+
+    public function add() {
+        $model = new \p12t\apps\foo\models\FooBarModel($this);
+
+        if ($this->data) {
+            if ($model->validate()) {
+                if ($model->add($this->data)) {
+                    $this->redirect('/foo/bar/index');
+                }
+            }
+
+        }
+        $this->render();
+    }
+
+    public function edit($id) {
+        $model = new \p12t\apps\foo\models\FooBarModel($this);
+
+        if ($this->data) {
+            if ($model->validate()) {
+                if ($model->edit($id)) {
+                    $this->redirect('/foo/bar/index');
+                }
+            }
+        }
+        $this->data['foo']['bar'] = $model->view($id);
+        $this->set(array('id' => $id));
+        $this->render();
+    }
+
+    public function del($id) {
+        $model = new \p12t\apps\foo\models\FooBarModel($this);
+        $model->del($id);
+        $this->redirect('/foo/bar/index');
     }
 }

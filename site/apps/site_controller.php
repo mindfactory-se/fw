@@ -21,9 +21,4 @@ namespace p12t\apps;
 class SiteController extends \p12t\core\Controller {
 
     public $vHelpers = array('Html', 'Form');
-    
-    public function  __construct() {
-        parent::__construct();
-        \p12t\core\App::loadHelper('Html');
-    }
 }

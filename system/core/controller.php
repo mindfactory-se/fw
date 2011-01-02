@@ -61,15 +61,18 @@ class Controller extends Object {
     public $layout = 'default';
 
     /**
+     * Holdes validation errors
+     *
+     * @var array
+     */
+    public $validationErrors = array();
+
+    /**
      * Viev helpers to be loaded.
      *
      * @var array
      */
     public $vHelpers = array();
-
-    public function  __construct() {
-        parent::__construct();
-    }
 
     protected function mergeHelpers() {
         $siteVars = get_class_vars('\\p12t\\apps\\SiteController');
