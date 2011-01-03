@@ -107,13 +107,14 @@ function pr($param) {
  * 
  * Returns the translated string if it's found in the given language file. 
  * Othervise it returns the given string.
- * @param string $str 
+ * @param string $str
+ * @param bool returns the value insted of echo if true.
  */
-function t($str, $return = false, $language = null) {
+function t($str, $return = false) {
     if ($return) {
-        return $str;
+        return \p12t\core\Locale::translate($str);
     } else {
-        echo $str;
+        echo \p12t\core\Locale::translate($str);
     }
 }
 

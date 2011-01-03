@@ -58,9 +58,11 @@ class Dispatcher extends Object {
         $this->checkControllers();
         $this->createController();
         $this->setData();
+        $this->setLocale();
+        $this->loadLocale();
         $this->invokeAction();
 
-        if (Config::get('sys.debug.level')) {
+        if (Config::get('default.debug_level')) {
             echo Benchmark::display();
             echo Log::display();
         }
@@ -76,6 +78,7 @@ class Dispatcher extends Object {
     private function loadRequierdFiles() {
         App::loadSettings('router');
         App::loadSettings('config/default');
+        App::loadSettings('config/db');
     }
 
     /**
@@ -134,5 +137,25 @@ class Dispatcher extends Object {
             $this->controller->data = $_POST['data'];
             unset ($_POST);
         }
+    }
+
+    private function setLocale() {
+        $methods = Config::get('default.locale_detection_methods');
+        $lang = null;
+        foreach ($methods as $method) {
+            switch ($method) {
+                case 'config':
+                    $langs = Config::get('default.locale_languages');
+                    $lang = $langs[0];
+                    break;
+                
+            }
+            if (!is_null($lang)) break;
+        }
+        App::set('sys.language', $lang);
+    }
+
+    private function loadLocale() {
+        App::loadLocale('common');
     }
 }

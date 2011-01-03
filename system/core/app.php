@@ -104,6 +104,18 @@ class App extends SingletonObject {
     }
 
     /**
+     * Loads the given file from local folder
+     *
+     * @access public
+     * @param string $name The name of the file to be loaded.
+     * @return boolean Returns true if file loaded
+     */
+    public static function loadLocale($name) {
+        $path = '/locale/' . App::get('sys.language') . '/' . $name . '.php';
+        return App::loadFile($path);
+    }
+
+    /**
      * Loads the given file from configfolder
      *
      * @access public
@@ -130,6 +142,7 @@ class App extends SingletonObject {
         if ($data) {
             extract($data);
         }
+        
         // Load the file. First try from app and second from system.
         if (file_exists(SITE_PATH . $path)) {
             require_once(SITE_PATH . $path);

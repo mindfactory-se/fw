@@ -10,10 +10,9 @@
  * @since 0.1.0
  */
 
-// Database config.
-\p12t\core\Config::set('db.default.driver', 'mysql');
-\p12t\core\Config::set('db.default.dns', 'mysql:unix_socket=/Applications/MAMP/tmp/mysql/mysql.sock;dbname=p12t');
-\p12t\core\Config::set('db.default.user', 'my_user');
-\p12t\core\Config::set('db.default.password', 'my_password');
+// Debug configuration.
+\p12t\core\Config::set('default.debug_level', 1);
 
-\p12t\core\Config::set('sys.debug.level', 1);
+// Locale configuration.
+\p12t\core\Config::set('default.locale_languages', array('en'));
+\p12t\core\Config::set('default.locale_detection_methods', array('config'));
