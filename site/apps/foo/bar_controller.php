@@ -16,7 +16,6 @@ namespace p12t\apps\foo;
  *
  * @since 0.1.0
  * @access public
- * @todo Change redirects
  */
 class BarController extends AppController {
 
@@ -40,7 +39,7 @@ class BarController extends AppController {
         if ($this->data) {
             if ($model->validate()) {
                 if ($model->add($this->data)) {
-                    $this->redirect('/foo/bar/index');
+                    $this->redirect('/foo/bar');
                 }
             }
 
@@ -54,7 +53,7 @@ class BarController extends AppController {
         if ($this->data) {
             if ($model->validate()) {
                 if ($model->edit($id)) {
-                    $this->redirect('/foo/bar/index');
+                    $this->redirect('/foo/bar');
                 }
             }
         }
@@ -66,6 +65,6 @@ class BarController extends AppController {
     public function del($id) {
         $model = new models\BarModel($this);
         $model->del($id);
-        $this->redirect('/foo/bar/index');
+        $this->redirect('/foo/bar');
     }
 }
