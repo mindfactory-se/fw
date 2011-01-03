@@ -15,6 +15,8 @@ namespace p12t\core;
  *
  * @since 0.1.0
  * @access public
+ * @todo Remove deprecated functions
+ * @todo Rename class
  */
 class App extends SingletonObject {
 

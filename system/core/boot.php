@@ -39,16 +39,44 @@ function __autoload($name) {
     loadFile('/' . str_replace(array('p12t\\', '\\'), array('', '/'), strtolower($name)) . '.php');
 }
 
-  /**
-     * Try to load the file in the give path.
-     *
-     * First try to require the file frome the application folder. If that's not
-     * successfull try to require the file from the system folder insted.
-     *
-     * @access public
-     * @param string $path Holdes the path to the file to be loaded.
-     * @return boolean Returns true if file requierd sucessfully.
-     */
+/**
+ * Make underscore naming camelcase.
+ *
+ * 'foo_bar' becomes 'fooBar'
+ *
+ * @param string $str Underscored string
+ * @return string Camelcased string
+ */
+function cc($str) {
+  $words = explode('_', strtolower($str));
+
+  $return = '';
+  foreach ($words as $word) {
+    $return .= ucfirst(trim($word));
+  }
+
+  return $return;
+}
+
+/**
+ * Convenience function for echo().
+ *
+ * @param mixed $value Value to be echoed.
+ */
+function e($value) {
+    echo $value;
+}
+
+/**
+ * Try to load the file in the give path.
+ *
+ * First try to require the file frome the application folder. If that's not
+ * successfull try to require the file from the system folder insted.
+ *
+ * @access public
+ * @param string $path Holdes the path to the file to be loaded.
+ * @return boolean Returns true if file requierd sucessfully.
+ */
 function loadFile($path) {
     //echo SITE_PATH . $path . '<br />';
     // Load the file. First try from site and second from system.
@@ -63,17 +91,51 @@ function loadFile($path) {
     }
 }
 
-function us($str) {
-    return strtolower(preg_replace('/(?<=[a-z])([A-Z])/', '_$1', $str));
+/**
+ * Convenience function for print_r().
+ *
+ * @param array $param Variable to print out
+ */
+function pr($param) {
+    echo '<pre>';
+    print_r($param);
+    echo '</pre>';
 }
 
-function cc($str) {
-  $words = explode('_', strtolower($str));
+/**
+ * Translates a given string.
+ * 
+ * Returns the translated string if it's found in the given language file. 
+ * Othervise it returns the given string.
+ * @param string $str 
+ */
+function t($str, $return = false, $language = null) {
+    if ($return) {
+        return $str;
+    } else {
+        echo $str;
+    }
+}
 
-  $return = '';
-  foreach ($words as $word) {
-    $return .= ucfirst(trim($word));
-  }
+/**
+ * Convenience function for var_dump().
+ *
+ * @param array $param Variable to print out
+ */
+function vd($param) {
+    echo '<pre>';
+    var_dump($param);
+    echo '</pre>';
+}
 
-  return $return;
+/**
+ * Make camelcase naming underscore.
+ *
+ * 'fooBar' becomes 'foo_bar'
+ *
+ * @param string $str Camelcased string
+ * @return string Underscored string
+ */
+function us($str) {
+    return strtolower(preg_replace('/(?<=[a-z])([A-Z])/', '_$1', $str));
 }
