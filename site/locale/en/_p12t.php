@@ -10,4 +10,6 @@
  * @since 0.3.0
  */
 
-\p12t\core\Locale::set('p12t.zip', '');
+namespace p12t\core;
+
+Locale::set('p12t.zip', '');

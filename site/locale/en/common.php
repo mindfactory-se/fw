@@ -10,4 +10,6 @@
  * @since 0.3.0
  */
 
-// \p12t\core\Locale::set('key', 'value');
+namespace p12t\core;
+
+// Locale::set('key', 'value');

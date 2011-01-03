@@ -10,10 +10,10 @@
  * @since 0.2.0
  */
 
-// Database config.
-\p12t\core\Config::set('db.default.driver', 'mysql');
-\p12t\core\Config::set('db.default.dns', 'mysql:host=localhost;dbname=my_db');
-\p12t\core\Config::set('db.default.user', 'my_user');
-\p12t\core\Config::set('db.default.password', 'my_password');
+namespace p12t\core;
 
-\p12t\core\Config::set('sys.debug.level', 1);
+// Database config.
+Config::set('db.default.driver', 'mysql');
+Config::set('db.default.dns', 'mysql:host=localhost;dbname=my_db');
+Config::set('db.default.user', 'my_user');
+Config::set('db.default.password', 'my_password');

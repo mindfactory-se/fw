@@ -10,9 +10,11 @@
  * @since 0.1.0
  */
 
+namespace p12t\core;
+
 // Debug configuration.
-\p12t\core\Config::set('default.debug_level', 1);
+Config::set('default.debug_level', 1);
 
 // Locale configuration.
-\p12t\core\Config::set('default.locale_languages', array('en'));
-\p12t\core\Config::set('default.locale_detection_methods', array('config'));
+Config::set('default.locale_languages', array('en'));
+Config::set('default.locale_detection_methods', array('config'));
