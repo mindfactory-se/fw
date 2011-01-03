@@ -57,7 +57,10 @@ class Dispatcher extends Object {
         Router::match();
         $this->checkControllers();
         $this->createController();
-        if (isset($_POST['data'])) $this->controller->data = $_POST['data'];
+        if (isset($_POST['data'])) {
+            $this->controller->data = $_POST['data'];
+            unset ($_POST);
+        }
         $this->invokeAction();
 
         if (Config::get('sys.debug.level')) {
