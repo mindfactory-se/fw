@@ -11,12 +11,10 @@
  */
 
 // Change value to your application path
-// define('APP_PATH', '/path/to/app/folder');
-define('SITE_PATH', '/Users/hepper/Sites/www/p12t/site');
+define('APP_PATH', '/path/to/app/folder');
 
-// Change value to your e7 path
-// define('SYS_PATH', '/path/to/e7/folder');
-define('SYS_PATH', '/Users/hepper/Sites/www/p12t/system');
+// Change value to your system path
+define('SYS_PATH', '/path/to/system/folder');
 
 // incluedes the bootstarp file
 require_once(SYS_PATH . '/core/boot.php');
