@@ -93,13 +93,13 @@ class View extends Object {
         $this->triggerHelpers();
         // Render view
         if (empty($path)) {
-            $path = '/apps/' . App::get('sys.route.app') . '/views/' . App::get('sys.route.controller') . '/' . App::get('sys.route.action') . '.php';
+            $path = '/apps/' . P12t::get('sys.route.app') . '/views/' . P12t::get('sys.route.controller') . '/' . P12t::get('sys.route.action') . '.php';
         }
         $this->set(array('viewContent' => $this->loadView($path)));
         ob_end_clean();
         
         // Render app layout
-        $path = '/layouts/' . App::get('sys.route.app') . '/' . $this->controller->appLayout . '.php';
+        $path = '/layouts/' . P12t::get('sys.route.app') . '/' . $this->controller->appLayout . '.php';
         $this->controller->set(array('content' => $this->loadView($path)));
         ob_end_clean();
         

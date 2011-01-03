@@ -49,9 +49,9 @@ class Dispatcher extends Object {
         Benchmark::set('Start');
 
         // Set some system values
-        App::set('sys.version', '0.2.0');
-        App::set('sys.name', 'p12t Framework');
-        App::set('sys.fullname', 'Pay If Yoy Like It Framework');
+        P12t::set('sys.version', '0.2.0');
+        P12t::set('sys.name', 'p12t Framework');
+        P12t::set('sys.fullname', 'Pay If Yoy Like It Framework');
 
         $this->loadRequierdFiles();
         Router::match();
@@ -76,9 +76,9 @@ class Dispatcher extends Object {
      * @access private
      */
     private function loadRequierdFiles() {
-        App::loadSettings('router');
-        App::loadSettings('config/default');
-        App::loadSettings('config/db');
+        P12t::loadSettings('router');
+        P12t::loadSettings('config/default');
+        P12t::loadSettings('config/db');
     }
 
     /**
@@ -91,12 +91,12 @@ class Dispatcher extends Object {
      */
     private function checkControllers() {
 
-        $fileName = '/apps/' . App::get('sys.route.app') . '/' . App::get('sys.route.controller') . '_controller.php';
+        $fileName = '/apps/' . P12t::get('sys.route.app') . '/' . P12t::get('sys.route.controller') . '_controller.php';
         if (!file_exists(\SITE_PATH . $fileName) AND !file_exists(\SYS_PATH . $fileName)) {
-            App::set('sys.route.app', 'system');
-            App::set('sys.route.controller', 'errors');
-            App::set('sys.route.action', 'e404');
-            App::set('sys.route.params', array(str_replace('/', '.', App::get('sys.route.visible'))));
+            P12t::set('sys.route.app', 'system');
+            P12t::set('sys.route.controller', 'errors');
+            P12t::set('sys.route.action', 'e404');
+            P12t::set('sys.route.params', array(str_replace('/', '.', P12t::get('sys.route.visible'))));
         }
     }
 
@@ -107,15 +107,15 @@ class Dispatcher extends Object {
      */
     private function createController() {
         //Create the controller object.
-        $this->controllerName = '\\p12t\\apps\\' . App::get('sys.route.app') . '\\' . ucfirst(App::get('sys.route.controller')) . 'Controller';
+        $this->controllerName = '\\p12t\\apps\\' . P12t::get('sys.route.app') . '\\' . ucfirst(P12t::get('sys.route.controller')) . 'Controller';
         $this->controller = new $this->controllerName;
 
-        if (!method_exists($this->controller, App::get('sys.route.action'))) {
-            $this->controller = new \p12t\apps\system\controllers\SystemErrorsController;
-            App::set('sys.route.app', 'system');
-            App::set('sys.route.controller', 'errors');
-            App::set('sys.route.action', 'e404');
-            App::set('sys.route.params', array(str_replace('/', '.', App::get('sys.route.visible'))));
+        if (!method_exists($this->controller, P12t::get('sys.route.action'))) {
+            $this->controller = new \p12t\apps\system\ErrorsController;
+            P12t::set('sys.route.app', 'system');
+            P12t::set('sys.route.controller', 'errors');
+            P12t::set('sys.route.action', 'e404');
+            P12t::set('sys.route.params', array(str_replace('/', '.', P12t::get('sys.route.visible'))));
         }
     }
 
@@ -125,10 +125,10 @@ class Dispatcher extends Object {
      * @access private
      */
     private function invokeAction() {
-        if (!is_array(App::get('sys.route.params'))) {
-            $this->controller->{App::get('sys.route.action')}();
+        if (!is_array(P12t::get('sys.route.params'))) {
+            $this->controller->{P12t::get('sys.route.action')}();
         } else {
-            call_user_func_array(array($this->controller, App::get('sys.route.action')), App::get('sys.route.params'));
+            call_user_func_array(array($this->controller, P12t::get('sys.route.action')), P12t::get('sys.route.params'));
         }
     }
 
@@ -152,10 +152,10 @@ class Dispatcher extends Object {
             }
             if (!is_null($lang)) break;
         }
-        App::set('sys.language', $lang);
+        P12t::set('sys.language', $lang);
     }
 
     private function loadLocale() {
-        App::loadLocale('common');
+        P12t::loadLocale('common');
     }
 }

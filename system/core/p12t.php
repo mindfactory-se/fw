@@ -18,7 +18,7 @@ namespace p12t\core;
  * @todo Remove deprecated functions
  * @todo Rename class
  */
-class App extends SingletonObject {
+class P12t extends SingletonObject {
 
     /**
      * Loads the given file from given path.
@@ -29,7 +29,7 @@ class App extends SingletonObject {
      */
     public static function load($name) {
         $path = '/' . $name . '.php';
-        return App::loadFile($path);
+        return P12t::loadFile($path);
     }
 
     /**
@@ -41,7 +41,7 @@ class App extends SingletonObject {
      */
     public static function loadController($name) {
         $path = '/apps/' . $name . '.php';
-        return App::loadFile($path);
+        return P12t::loadFile($path);
     }
 
     /**
@@ -53,7 +53,7 @@ class App extends SingletonObject {
      */
     public static function loadSettings($name) {
         $path = '/settings/' . $name . '.php';
-        return App::loadFile($path);
+        return P12t::loadFile($path);
     }
 
     /**
@@ -68,11 +68,11 @@ class App extends SingletonObject {
         
         //Load mod model
         $path = '/apps/' . $name[0] . '/app_' . $name[0] . '_model.php';
-        App::loadFile($path);
+        P12t::loadFile($path);
 
         //Load requested model
         $path = '/apps/' . $name[0] . '/models/' . $name[0] . '_' . $name[1] . '_model.php';
-        if (App::loadFile($path)) {
+        if (P12t::loadFile($path)) {
             $modelName = ucfirst($name[0]) . ucfirst($name[1]) . 'Model';
             return new $modelName;
         }
@@ -88,7 +88,7 @@ class App extends SingletonObject {
     public static function loadView($name, $data) {
         $name = explode('.', $name);
         $path = '/apps/' . $name[0] . '/views/' . $name[1] . '/' . $name[2] . '.php';
-        return App::loadFile($path);
+        return P12t::loadFile($path);
     }
 
     /**
@@ -100,7 +100,7 @@ class App extends SingletonObject {
      */
     public static function loadHelper($name) {
         $path = '/helpers/' . $name . '.php';
-        return App::loadFile($path);
+        return P12t::loadFile($path);
     }
 
     /**
@@ -111,8 +111,8 @@ class App extends SingletonObject {
      * @return boolean Returns true if file loaded
      */
     public static function loadLocale($name) {
-        $path = '/locale/' . App::get('sys.language') . '/' . $name . '.php';
-        return App::loadFile($path);
+        $path = '/locale/' . P12t::get('sys.language') . '/' . $name . '.php';
+        return P12t::loadFile($path);
     }
 
     /**
@@ -124,7 +124,7 @@ class App extends SingletonObject {
      */
     public function loadConfig($name) {
         $path = '/settings/config/' . $name . '.php';
-        return App::loadFile($path);
+        return P12t::loadFile($path);
     }
 
     /**

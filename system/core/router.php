@@ -44,15 +44,15 @@ class Router extends SingletonObject {
         foreach ($_this->values as $value) {
             foreach ($value as $key => $name) {
                 if(preg_match('#' . $key . '#i', $path)) {
-                    App::set('sys.route.internal', preg_replace('#' . $key . '#i', $name, $path));
-                    App::set('sys.route.visible', $path);
+                    P12t::set('sys.route.internal', preg_replace('#' . $key . '#i', $name, $path));
+                    P12t::set('sys.route.visible', $path);
                     Router::parse();
                     break 2;
                 }
             }
         }
         $baseUrl = substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], 'index.php') - 1);
-        App::set('sys.route.base', $baseUrl);
+        P12t::set('sys.route.base', $baseUrl);
     }
 
     /**
@@ -63,15 +63,15 @@ class Router extends SingletonObject {
     public static function parse() {
         $_this =& self::getInstance();
 
-        $url = explode('/', App::get('sys.route.internal'));
+        $url = explode('/', P12t::get('sys.route.internal'));
 
-        App::set('sys.route.app', $url[1]);
+        P12t::set('sys.route.app', $url[1]);
         $url[2] = (isset ($url[2])?$url[2]:'');
-        App::set('sys.route.controller', $url[2]);
+        P12t::set('sys.route.controller', $url[2]);
         $url[3] = (isset ($url[3])?$url[3]:'');
-        App::set('sys.route.action', $url[3]);
+        P12t::set('sys.route.action', $url[3]);
         if (count($url) > 4) {
-            App::set('sys.route.params', array_slice($url, 4));
+            P12t::set('sys.route.params', array_slice($url, 4));
         }
     }
     
