@@ -57,10 +57,7 @@ class Dispatcher extends Object {
         Router::match();
         $this->checkControllers();
         $this->createController();
-        if (isset($_POST['data'])) {
-            $this->controller->data = $_POST['data'];
-            unset ($_POST);
-        }
+        $this->setData();
         $this->invokeAction();
 
         if (Config::get('sys.debug.level')) {
@@ -129,6 +126,13 @@ class Dispatcher extends Object {
             $this->controller->{App::get('sys.route.action')}();
         } else {
             call_user_func_array(array($this->controller, App::get('sys.route.action')), App::get('sys.route.params'));
+        }
+    }
+
+    private function setData() {
+        if (isset($_POST['data'])) {
+            $this->controller->data = $_POST['data'];
+            unset ($_POST);
         }
     }
 }
