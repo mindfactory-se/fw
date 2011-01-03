@@ -35,7 +35,7 @@ $p12t->run();
  * @param string $name Name of class to include
  */
 function __autoload($name) {
-    $name = makeUnderScore($name);
+    $name = us($name);
     loadFile('/' . str_replace(array('p12t\\', '\\'), array('', '/'), strtolower($name)) . '.php');
 }
 
@@ -63,11 +63,11 @@ function loadFile($path) {
     }
 }
 
-function makeUnderScore($str) {
+function us($str) {
     return strtolower(preg_replace('/(?<=[a-z])([A-Z])/', '_$1', $str));
 }
 
-function makeCamelCase($str) {
+function cc($str) {
   $words = explode('_', strtolower($str));
 
   $return = '';
