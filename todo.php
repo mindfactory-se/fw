@@ -4,6 +4,7 @@
  * Records of todos in files that dose't exists yet or tasks not specefic to
  * one file.
  *
+ * @todo Change default folder name
  * @todo CMS uses models
  * @todo Security in incomming data
  * @todo Make CMS admin featurse

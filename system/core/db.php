@@ -17,7 +17,6 @@ namespace p12t\core;
  *
  * @since 0.1.0
  * @access public
- * @todo Change dns value
  */
 class Db {
     /**
@@ -47,14 +46,7 @@ class Db {
     final public static function &getInstance($db = 'default') {
         
         if (!isset(self::$inctance[$db])) {
-            $dsn = NULL;
-            $dsn .= Config::get('db.' . $db . '.prefix') . ':';
-            if (Config::get('db.' . $db . '.useSocket')) {
-                $dsn .=  'unix_socket=' . Config::get('db.' . $db . '.socket') . ';';
-            } else {
-                $dsn .=  'host=' . Config::get('db.' . $db . '.host') . ';port=' . Config::get('db' . $db . 'port');
-            }
-            $dsn .= 'dbname=' . Config::get('db.' . $db . '.name');
+            $dsn = Config::get('db.' . $db . '.dns');
             $user = Config::get('db.' . $db . '.user');
             $password = Config::get('db.' . $db . '.password');
 
