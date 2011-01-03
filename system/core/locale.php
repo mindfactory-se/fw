@@ -16,7 +16,6 @@ namespace p12t\core;
  *
  * @since 0.3.0
  * @access public
- * @todo include app locale
  * @todo detect locale by user agent
  * @todo detect locale by subdomain
  * @todo detect locale by url
