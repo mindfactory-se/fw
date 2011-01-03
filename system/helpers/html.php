@@ -32,7 +32,7 @@ class Html extends \p12t\core\Vhelper {
      */
     public function a($href, $title, $options = array()) {
         if (!$this->isExternalUrl($href)) {
-            $url = \p12t\core\P12t::get('sys.route.base') . $href;
+            $href = \p12t\core\P12t::get('sys.route.base') . $href;
         }
         return '<a href="' . $href . '"' . $this->buildOptionsString($options) . '>' . $title .'</a>';
     }
