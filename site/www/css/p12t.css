@@ -21,7 +21,7 @@ p {
 /* Headings
 -------------------------------------------------------------- */
 
-h1,h2,h3,h4,h5,h6 { font-weight: normal; color: #996600; }
+h1,h2,h3,h4,h5,h6 { font-weight: normal; color: #999; }
 
 h1 { font-size: 3em; margin-bottom: 0.5em; }
 h2 { font-size: 2em; margin-bottom: 0.75em; }
@@ -52,7 +52,7 @@ h4 img, h5 img, h6 img {
 
 .colum-header {
     height: 10px;
-    background: #996600;
+    background: #999;
 }
 
 #nav-left-container {
@@ -63,7 +63,7 @@ h4 img, h5 img, h6 img {
     width: 198px;
     float: left;
     border: 1px solid #999;
-    color: #996600;
+    color: #999;
     border-top: 0px;
     padding: 20px;
     font-size: 1.2em;
@@ -75,12 +75,12 @@ h4 img, h5 img, h6 img {
 
 #nav-top {
     height: 20px;
-    background: #996600;
+    background: #999;
 }
 
 #nav-breadcrump {
     border: 1px solid #999;
-    color: #996600;
+    color: #999;
     border-top: 0px;
     padding: 5px;
     font-size: 0.8em;
