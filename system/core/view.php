@@ -107,7 +107,8 @@ class View extends Object {
         $path = '/layouts/' . $this->controller->layout . '.php';
         $output = $this->loadView($path);
         ob_end_clean();
-        
+
+        header('Content-Type:text/html; charset=UTF-8');
         echo $output;
     }
 

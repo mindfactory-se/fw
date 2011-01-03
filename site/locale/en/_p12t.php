@@ -12,4 +12,4 @@
 
 namespace p12t\core;
 
-Locale::set('p12t.zip', '');
+Locale::set('p12t.locale.chars', '');

@@ -112,7 +112,9 @@ class Model extends Object {
     private function alphaNumeric($field, $options) {
         $arrField = explode('.', $field);
         $data = (isset($this->data[$arrField[0]][$arrField[1]][$arrField[2]])) ? $this->data[$arrField[0]][$arrField[1]][$arrField[2]] : '';
-        if (!preg_match('/^[\p{Ll}\p{Lm}\p{Lo}\p{Lt}\p{Lu}\p{Nd}]+$/mu', $data)) {
+        $localChars = \p12t\core\Locale::get('p12t.locale.chars');
+        $regex = '/^[\p{L}\p{Nd}'. $localChars .']+$/mu';
+        if (!preg_match($regex, $data)) {
             $this->setValidationError($field, $options[0]);
         }
     }
@@ -396,6 +398,26 @@ class Model extends Object {
         }
     }
 
+    /**
+     * Validates an string field.
+     *
+     * Checks if a field contains numbers and letters.
+     *
+     * @access private
+     * @param string $field Name of field to validate.
+     * @param array $options ('Error message').
+     * @since 0.2.0
+     */
+    private function string($field, $options) {
+        $arrField = explode('.', $field);
+        $data = (isset($this->data[$arrField[0]][$arrField[1]][$arrField[2]])) ? $this->data[$arrField[0]][$arrField[1]][$arrField[2]] : null;
+        $localChars = \p12t\core\Locale::get('p12t.locale.chars');
+        $regex = '/^[\p{L}'. $localChars .']+$/mu';
+        if (!preg_match($regex, $data)) {
+            $this->setValidationError($field, $options[0]);
+        }
+    }
+    
     /**
      * Validates an url field.
      *

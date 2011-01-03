@@ -74,8 +74,11 @@ class Form extends \p12t\core\Vhelper {
      * @return string Form tag.
      */
     public function create($action = NULL, $options = array()) {
-        if (!$action) $action = App::get ('sys.route.visible');
-        return sprintf('<form action="/%s" method="POST"%s>', $action, $this->buildOptionsString($options));
+        if (!$action) $action = \p12t\core\P12t::get('sys.route.base');
+        if (!$this->isExternalUrl($action)) {
+            $action = \p12t\core\P12t::get('sys.route.base') . '/' . $action;
+        }
+        return sprintf('<form action="%s" method="POST"%s>', $action, $this->buildOptionsString($options));
     }
 
     /**

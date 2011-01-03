@@ -157,6 +157,7 @@ class Dispatcher extends Object {
 
     private function loadLocale() {
         P12t::loadLocale('common');
+        P12t::loadLocale('_p12t');
         P12t::loadLocale(P12t::get('sys.route.app'));
     }
 }

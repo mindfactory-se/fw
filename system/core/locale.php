@@ -19,6 +19,7 @@ namespace p12t\core;
  * @todo detect locale by user agent
  * @todo detect locale by subdomain
  * @todo detect locale by url
+ * @todo detect locale by session
  */
 class Locale extends SingletonObject {
 
