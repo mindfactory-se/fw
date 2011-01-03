@@ -88,7 +88,7 @@ class Dispatcher extends Object {
      */
     private function checkControllers() {
 
-        $fileName = '/apps/' . App::get('sys.route.app') . '/controllers/' . App::get('sys.route.app') . '_' . App::get('sys.route.controller') . '_controller.php';
+        $fileName = '/apps/' . App::get('sys.route.app') . '/' . App::get('sys.route.controller') . '_controller.php';
         if (!file_exists(\SITE_PATH . $fileName) AND !file_exists(\SYS_PATH . $fileName)) {
             App::set('sys.route.app', 'system');
             App::set('sys.route.controller', 'errors');
@@ -104,7 +104,7 @@ class Dispatcher extends Object {
      */
     private function createController() {
         //Create the controller object.
-        $this->controllerName = '\\p12t\\apps\\' . App::get('sys.route.app') . '\\controllers\\' . ucfirst(App::get('sys.route.app')) . ucfirst(App::get('sys.route.controller')) . 'Controller';
+        $this->controllerName = '\\p12t\\apps\\' . App::get('sys.route.app') . '\\' . ucfirst(App::get('sys.route.controller')) . 'Controller';
         $this->controller = new $this->controllerName;
 
         if (!method_exists($this->controller, App::get('sys.route.action'))) {

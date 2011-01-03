@@ -1,5 +1,7 @@
 <?php
 
+namespace \p12t\apps\cms\models;
+
 /**
  * p12t PHP Framework : /system/mods/cms/models/cms_dynamic_model.php
  *
@@ -15,7 +17,7 @@
  * @since 0.1.0
  * @access public
  */
-class CmsDbModel extends AppCmsModel {
+class DbModel extends AppModel {
 
     public function view($id) {
         $db = Db::getInstance();

@@ -1,6 +1,6 @@
 <?php
 
-namespace p12t\apps\foo\controllers;
+namespace p12t\apps\foo;
 
 /**
  * p12t PHP Framework : /app/mods/foo/controllers/foo_bar_controller.php
@@ -17,24 +17,24 @@ namespace p12t\apps\foo\controllers;
  * @since 0.1.0
  * @access public
  */
-class FooBarController extends \p12t\apps\foo\AppFooController {
+class BarController extends AppController {
 
     public $vHelpers = array('Form');
     
     public function index() {
-        $model = new \p12t\apps\foo\models\FooBarModel($this);
+        $model = new models\BarModel($this);
         $this->set(array('items' => $model->index()));
         $this->render();
     }
 
     public function view($id) {
-        $model = new \p12t\apps\foo\models\FooBarModel($this);
+        $model = new models\BarModel($this);
         $this->set(array('item' => $model->view($id)));
         $this->render();
     }
 
     public function add() {
-        $model = new \p12t\apps\foo\models\FooBarModel($this);
+        $model = new models\BarModel($this);
 
         if ($this->data) {
             if ($model->validate()) {
@@ -48,7 +48,7 @@ class FooBarController extends \p12t\apps\foo\AppFooController {
     }
 
     public function edit($id) {
-        $model = new \p12t\apps\foo\models\FooBarModel($this);
+        $model = new models\BarModel($this);
 
         if ($this->data) {
             if ($model->validate()) {
@@ -63,7 +63,7 @@ class FooBarController extends \p12t\apps\foo\AppFooController {
     }
 
     public function del($id) {
-        $model = new \p12t\apps\foo\models\FooBarModel($this);
+        $model = new models\BarModel($this);
         $model->del($id);
         $this->redirect('/foo/bar/index');
     }

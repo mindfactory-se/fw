@@ -17,7 +17,7 @@ namespace p12t\apps\foo\models;
  * @since 0.1.0
  * @access public
  */
-class FooBarModel extends \p12t\apps\foo\AppFooModel {
+class BarModel extends AppModel {
 
     public $validation = array(
         'foo.bar.title' => array(

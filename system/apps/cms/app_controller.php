@@ -1,8 +1,9 @@
 <?php
 
-namespace p12t\apps\foo;
+namespace p12t\apps\cms;
+
 /**
- * p12t PHP Framework : /app/mods/foo/mod_foo_bar_controller.php
+ * p12t PHP Framework : /system/mods/cms/mod_cms_controller.php
  *
  * @package p12t
  * @author hepper
@@ -11,11 +12,11 @@ namespace p12t\apps\foo;
  */
 
 /**
- * Example app to show file structure and basic usage.
+ * Base CMS controller.
  *
  * @since 0.1.0
  * @access public
  */
-class AppFooController extends \p12t\apps\SiteController {
+class AppController extends \p12t\apps\SiteController {
 
 }

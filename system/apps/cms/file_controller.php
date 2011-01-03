@@ -1,6 +1,6 @@
 <?php
 
-namespace p12t\apps\cms\controllers;
+namespace p12t\apps\cms;
 
 /**
  * p12t PHP Framework : /system/mods/cms/controllers/cms_static_controller.php
@@ -17,7 +17,7 @@ namespace p12t\apps\cms\controllers;
  * @since 0.1.0
  * @access public
  */
-class CmsFileController extends \p12t\apps\cms\AppCmsController {
+class FileController extends AppController {
     
     /**
      * Displays the requestetd static page.

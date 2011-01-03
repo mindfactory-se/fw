@@ -76,7 +76,7 @@ class Controller extends Object {
 
     protected function mergeHelpers() {
         $siteVars = get_class_vars('\\p12t\\apps\\SiteController');
-        $appVars = get_class_vars('\\p12t\\apps\\' . App::get('sys.route.app') . '\\App'. App::get('sys.route.app') . 'Controller');
+        $appVars = get_class_vars('\\p12t\\apps\\' . App::get('sys.route.app') . '\\AppController');
         $this->vHelpers = array_unique(array_merge($siteVars['vHelpers'], $appVars['vHelpers'], $this->vHelpers));        
     }
 

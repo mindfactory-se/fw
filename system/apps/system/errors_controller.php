@@ -1,6 +1,6 @@
 <?php
 
-namespace p12t\apps\system\controllers;
+namespace p12t\apps\system;
 /**
  * p12t PHP Framework : /system/mods/system/controllers/system_errors_controller.php
  *
@@ -13,10 +13,10 @@ namespace p12t\apps\system\controllers;
 /**
  * Error controller the framework uses to display diffretn error messages.
  *
- * @since 1.0
+ * @since 0.1.0
  * @access public
  */
-class SystemErrorsController extends \p12t\apps\system\AppSystemController {
+class ErrorsController extends AppController {
 
     public $helpers = array('Html');
     

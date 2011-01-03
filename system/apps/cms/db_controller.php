@@ -1,6 +1,6 @@
 <?php
 
-namespace p12t\apps\cms\controllers;
+namespace p12t\apps\cms;
 
 /**
  * p12t PHP Framework : /system/mods/cms/controllers/cms_db_controller.php
@@ -18,11 +18,10 @@ namespace p12t\apps\cms\controllers;
  * @access public
  */
 
-class CmsDbController extends \p12t\apps\cms\AppCmsController {
+class DbController extends AppController {
     
     public function view($id = NULL) {
-    $model = App::loadModel('cms.db');
-    //print_r($model->view($id));
+    $model = new models\DbModel($this);
     $this->set(array('records' => $model->view($id)));
     $this->render();
 }
