@@ -16,7 +16,6 @@ namespace p12t\core;
  * @since 0.1.0
  * @access public
  * @todo Remove deprecated functions
- * @todo Rename class
  */
 class P12t extends SingletonObject {
 
@@ -28,6 +27,7 @@ class P12t extends SingletonObject {
      * @return boolean Returns true if file loaded
      */
     public static function load($name) {
+        echo __METHOD__ . ': Deprecated.<br>';
         $path = '/' . $name . '.php';
         return P12t::loadFile($path);
     }
@@ -40,6 +40,7 @@ class P12t extends SingletonObject {
      * @return boolean Returns true if file loaded
      */
     public static function loadController($name) {
+        echo __METHOD__ . ': Deprecated.<br>';
         $path = '/apps/' . $name . '.php';
         return P12t::loadFile($path);
     }
@@ -64,6 +65,7 @@ class P12t extends SingletonObject {
      * @return boolean Returns true if file loaded
      */
     public static function loadModel($name) {
+        echo __METHOD__ . ': Deprecated.<br>';
         $name = explode('.', $name);
         
         //Load mod model
@@ -86,6 +88,7 @@ class P12t extends SingletonObject {
      * @return boolean Returns true if file loaded
      */
     public static function loadView($name, $data) {
+        echo __METHOD__ . ': Deprecated.<br>';
         $name = explode('.', $name);
         $path = '/apps/' . $name[0] . '/views/' . $name[1] . '/' . $name[2] . '.php';
         return P12t::loadFile($path);
@@ -99,6 +102,7 @@ class P12t extends SingletonObject {
      * @return boolean Returns true if file loaded
      */
     public static function loadHelper($name) {
+        echo __METHOD__ . ': Deprecated.<br>';
         $path = '/helpers/' . $name . '.php';
         return P12t::loadFile($path);
     }

@@ -16,6 +16,7 @@ namespace p12t\apps\foo;
  *
  * @since 0.1.0
  * @access public
+ * @todo Change redirects
  */
 class BarController extends AppController {
 
