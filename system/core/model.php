@@ -151,6 +151,133 @@ class Model extends Object {
     }
 
     /**
+     * Validates an date field.
+     *
+     * Checks if a field contains an valid date.
+     *
+     * @access private
+     * @param string $field Name of field to validate.
+     * @param array $options ('Error message').
+     * @since 0.3.0
+     */
+    private function date($field, $options) {
+        $arrField = explode('.', $field);
+        $data = (isset($this->data[$arrField[0]][$arrField[1]][$arrField[2]])) ? $this->data[$arrField[0]][$arrField[1]][$arrField[2]] : '';
+        $formats = \p12t\core\Locale::get('p12t.date');
+        $ok = false;
+        foreach ($formats as $format) {
+            echo 'ok|';
+            switch($format) {
+                case 'YYYYMMDD':
+                    $regex = '/^(?:(?:\d{4})([ -\/\.]?)(?:\d{2})\1(?:\d{2}))$/';
+                    if (preg_match($regex, $data)) {
+                        $date = str_replace(array(' ', '.', '\\', '-'), '', $data);
+                        $y = substr( $date, 0, 4 );
+                        $m = substr( $date, 4, 2 );
+                        $d = substr( $date, 6, 2 );
+                        if (checkdate($m, $d, $y)) {
+                            $ok = true;
+                            break 2;
+                        }
+                    }
+                    break;
+                case 'YYMMDD':
+                    $regex = '/^(?:(?:\d{2})([ -\/\.]?)(?:\d{2})\1(?:\d{2}))$/';
+                    if (preg_match($regex, $data)) {
+                        $date = str_replace(array(' ', '.', '\\', '-'), '', $data);
+                        $y = substr( $date, 0, 2 );
+                        $m = substr( $date, 2, 2 );
+                        $d = substr( $date, 4, 2 );
+                        if (checkdate($m, $d, $y)) {
+                            $ok = true;
+                            break 2;
+                        }
+                    }
+                    break;
+                case 'YYYYDDMM':
+                    $regex = '/^(?:(?:\d{4})([ -\/\.]?)(?:\d{2})\1(?:\d{2}))$/';
+                    if (preg_match($regex, $data)) {
+                        $date = str_replace(array(' ', '.', '\\', '-'), '', $data);
+                        $y = substr( $date, 0, 4 );
+                        $d = substr( $date, 4, 2 );
+                        $m = substr( $date, 6, 2 );
+                        if (checkdate($m, $d, $y)) {
+                            $ok = true;
+                            break 2;
+                        }
+                    }
+                    break;
+                case 'YYDDMM':
+                    $regex = '/^(?:(?:\d{2})([ -\/\.]?)(?:\d{2})\1(?:\d{2}))$/';
+                    if (preg_match($regex, $data)) {
+                        $date = str_replace(array(' ', '.', '\\', '-'), '', $data);
+                        $y = substr( $date, 0, 2 );
+                        $d = substr( $date, 2, 2 );
+                        $m = substr( $date, 4, 2 );
+                        if (checkdate($m, $d, $y)) {
+                            $ok = true;
+                            break 2;
+                        }
+                    }
+                    break;
+                case 'DDMMYYYY':
+                    $regex = '/^(?:(?:\d{2})([ -\/\.]?)(?:\d{2})\1(?:\d{4}))$/';
+                    if (preg_match($regex, $data)) {
+                        $date = str_replace(array(' ', '.', '\\', '-'), '', $data);
+                        $d = substr( $date, 0, 2 );
+                        $m = substr( $date, 2, 2 );
+                        $y = substr( $date, 4, 4 );
+                        if (checkdate($m, $d, $y)) {
+                            $ok = true;
+                            break 2;
+                        }
+                    }
+                    break;
+                case 'DDMMYY':
+                    $regex = '/^(?:(?:\d{2})([ -\/\.]?)(?:\d{2})\1(?:\d{2}))$/';
+                    if (preg_match($regex, $data)) {
+                        $date = str_replace(array(' ', '.', '\\', '-'), '', $data);
+                        $d = substr( $date, 0, 2 );
+                        $m = substr( $date, 2, 2 );
+                        $y = substr( $date, 4, 2 );
+                        if (checkdate($m, $d, $y)) {
+                            $ok = true;
+                            break 2;
+                        }
+                    }
+                    break;
+                case 'MMDDYYYY':
+                    $regex = '/^(?:(?:\d{2})([ -\/\.]?)(?:\d{2})\1(?:\d{4}))$/';
+                    if (preg_match($regex, $data)) {
+                        $date = str_replace(array(' ', '.', '\\', '-'), '', $data);
+                        $m = substr( $date, 0, 2 );
+                        $d = substr( $date, 2, 2 );
+                        $y = substr( $date, 4, 4 );
+                        if (checkdate($m, $d, $y)) {
+                            $ok = true;
+                            break 2;
+                        }
+                    }
+                    break;
+                case 'MMDDYY':
+                    $regex = '/^(?:(?:\d{2})([ -\/\.]?)(?:\d{2})\1(?:\d{2}))$/';
+                    if (preg_match($regex, $data)) {
+                        $date = str_replace(array(' ', '.', '\\', '-'), '', $data);
+                        $m = substr( $date, 0, 2 );
+                        $d = substr( $date, 2, 2 );
+                        $y = substr( $date, 4, 2 );
+                        if (checkdate($m, $d, $y)) {
+                            $ok = true;
+                            break 2;
+                        }
+                    }
+                    break;
+            }
+        }
+        if (!$ok) $this->setValidationError($field, $options[0]);
+    }
+
+    /**
      * Validates an email field.
      *
      * Checks if a field contains a valid emailadress.
@@ -503,6 +630,25 @@ class Model extends Object {
         $regex = '/^[\p{L}'. $localChars .']+$/mu';
         if (!preg_match($regex, $data)) {
             $this->setValidationError($field, $options[0]);
+        }
+    }
+
+    /**
+     * Validates a time field.
+     *
+     * Checks if a field contains a valid time.
+     *
+     * @access private
+     * @param string $field Name of field to validate.
+     * @param array $options ('Error message').
+     * @since 0.3.0
+     */
+    private function time($field, $options) {
+        $arrField = explode('.', $field);
+        $data = (isset($this->data[$arrField[0]][$arrField[1]][$arrField[2]])) ? $this->data[$arrField[0]][$arrField[1]][$arrField[2]] : null;
+        $regex = \p12t\core\Locale::get('p12t.time_'.$options[0]);
+        if (!preg_match($regex, $data)) {
+            $this->setValidationError($field, $options[1]);
         }
     }
     
