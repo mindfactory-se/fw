@@ -12,4 +12,6 @@
 
 namespace p12t\core;
 
-Locale::set('p12t.locale.chars', '');
+Locale::set('p12t.chars', '');
+Locale::set('p12t.phone', '/^(?:\+?1)?[-. ]?\\(?[2-9][0-8][0-9]\\)?[-. ]?[2-9][0-9]{2}[-. ]?[0-9]{4}$/');
+Locale::set('p12t.zip', '/^([0-9]{5})(-[0-9]{4})?$/i');

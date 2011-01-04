@@ -18,7 +18,6 @@ namespace p12t\core;
  *
  * @since 0.1.0
  * @access public
- * @todo zip validation when language developed
  * @todo phone validation when language developed
  * @todo date validation
  * @todo time validation
@@ -112,7 +111,7 @@ class Model extends Object {
     private function alphaNumeric($field, $options) {
         $arrField = explode('.', $field);
         $data = (isset($this->data[$arrField[0]][$arrField[1]][$arrField[2]])) ? $this->data[$arrField[0]][$arrField[1]][$arrField[2]] : '';
-        $localChars = \p12t\core\Locale::get('p12t.locale.chars');
+        $localChars = \p12t\core\Locale::get('p12t.chars');
         $regex = '/^[\p{L}\p{Nd}'. $localChars .']+$/mu';
         if (!preg_match($regex, $data)) {
             $this->setValidationError($field, $options[0]);
@@ -354,6 +353,25 @@ class Model extends Object {
     }
 
     /**
+     * Validates an zip code field.
+     *
+     * Checks if a field contains an valid zip code.
+     *
+     * @access private
+     * @param string $field Name of field to validate.
+     * @param array $options ('Error message').
+     * @since 0.3.0
+     */
+    private function phone($field, $options) {
+        $arrField = explode('.', $field);
+        $data = (isset($this->data[$arrField[0]][$arrField[1]][$arrField[2]])) ? $this->data[$arrField[0]][$arrField[1]][$arrField[2]] : '';
+        $regex = \p12t\core\Locale::get('p12t.phone');
+        if (!preg_match($regex, $data)) {
+            $this->setValidationError($field, $options[0]);
+        }
+    }
+
+    /**
      * Validates an numric fields range.
      *
      * Checks if a numric field is between two values.
@@ -406,12 +424,12 @@ class Model extends Object {
      * @access private
      * @param string $field Name of field to validate.
      * @param array $options ('Error message').
-     * @since 0.2.0
+     * @since 0.3.0
      */
     private function string($field, $options) {
         $arrField = explode('.', $field);
         $data = (isset($this->data[$arrField[0]][$arrField[1]][$arrField[2]])) ? $this->data[$arrField[0]][$arrField[1]][$arrField[2]] : null;
-        $localChars = \p12t\core\Locale::get('p12t.locale.chars');
+        $localChars = \p12t\core\Locale::get('p12t.chars');
         $regex = '/^[\p{L}'. $localChars .']+$/mu';
         if (!preg_match($regex, $data)) {
             $this->setValidationError($field, $options[0]);
@@ -464,6 +482,25 @@ class Model extends Object {
             '(?:#' . $valid . '*)?$/i';
         if (!preg_match($regex, $data)) {
             $this->setValidationError($field, $options[2]);
+        }
+    }
+
+    /**
+     * Validates an zip code field.
+     *
+     * Checks if a field contains an valid zip code.
+     *
+     * @access private
+     * @param string $field Name of field to validate.
+     * @param array $options ('Error message').
+     * @since 0.3.0
+     */
+    private function zip($field, $options) {
+        $arrField = explode('.', $field);
+        $data = (isset($this->data[$arrField[0]][$arrField[1]][$arrField[2]])) ? $this->data[$arrField[0]][$arrField[1]][$arrField[2]] : '';
+        $regex = \p12t\core\Locale::get('p12t.zip');
+        if (!preg_match($regex, $data)) {
+            $this->setValidationError($field, $options[0]);
         }
     }
 }
