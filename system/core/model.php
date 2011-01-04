@@ -21,8 +21,6 @@ namespace p12t\core;
  * @todo date validation
  * @todo time validation
  * @todo dateTime validation
- * @todo ip validation
- * @todo social security number validation when language developed
  */
 class Model extends Object {
 
@@ -256,6 +254,60 @@ class Model extends Object {
         $IntValue = intval($data);
         $StrValue = strval($IntValue);
         if($StrValue != $data) {
+            $this->setValidationError($field, $options[0]);
+        }
+    }
+
+    /**
+     * Validates an ip field.
+     *
+     * Checks if a field contains an valid IPv4 or IPv6 adress.
+     *
+     * @access private
+     * @param string $field Name of field to validate.
+     * @param array $options ('Error message').
+     * @since 0.3.0
+     */
+    private function ip($field, $options) {
+        $arrField = explode('.', $field);
+        $data = (isset($this->data[$arrField[0]][$arrField[1]][$arrField[2]])) ? $this->data[$arrField[0]][$arrField[1]][$arrField[2]] : '';
+        if (!filter_var($data, FILTER_VALIDATE_IP, array('flags' => FILTER_FLAG_IPV4)) && !filter_var($data, FILTER_VALIDATE_IP, array('flags' => FILTER_FLAG_IPV6))) {
+            $this->setValidationError($field, $options[0]);
+        }
+    }
+
+    /**
+     * Validates an IPv4 field.
+     *
+     * Checks if a field contains an valid IPv4 adress.
+     *
+     * @access private
+     * @param string $field Name of field to validate.
+     * @param array $options ('Error message').
+     * @since 0.3.0
+     */
+    private function ip4($field, $options) {
+        $arrField = explode('.', $field);
+        $data = (isset($this->data[$arrField[0]][$arrField[1]][$arrField[2]])) ? $this->data[$arrField[0]][$arrField[1]][$arrField[2]] : '';
+        if (!filter_var($data, FILTER_VALIDATE_IP, array('flags' => FILTER_FLAG_IPV4))) {
+            $this->setValidationError($field, $options[0]);
+        }
+    }
+
+    /**
+     * Validates an IPv6 field.
+     *
+     * Checks if a field contains an valid or IPv6 adress.
+     *
+     * @access private
+     * @param string $field Name of field to validate.
+     * @param array $options ('Error message').
+     * @since 0.3.0
+     */
+    private function ip6($field, $options) {
+        $arrField = explode('.', $field);
+        $data = (isset($this->data[$arrField[0]][$arrField[1]][$arrField[2]])) ? $this->data[$arrField[0]][$arrField[1]][$arrField[2]] : '';
+        if (!filter_var($data, FILTER_VALIDATE_IP, array('flags' => FILTER_FLAG_IPV6))) {
             $this->setValidationError($field, $options[0]);
         }
     }
