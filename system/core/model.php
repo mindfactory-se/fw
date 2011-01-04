@@ -18,7 +18,6 @@ namespace p12t\core;
  *
  * @since 0.1.0
  * @access public
- * @todo phone validation when language developed
  * @todo date validation
  * @todo time validation
  * @todo dateTime validation
@@ -413,6 +412,25 @@ class Model extends Object {
         $data = (isset($this->data[$arrField[0]][$arrField[1]][$arrField[2]])) ? $this->data[$arrField[0]][$arrField[1]][$arrField[2]] : null;
         if (!preg_match($options[0], $data)) {
             $this->setValidationError($field, $options[1]);
+        }
+    }
+
+    /**
+     * Validates an social security number field.
+     *
+     * Checks if a field contains an valid social security number.
+     *
+     * @access private
+     * @param string $field Name of field to validate.
+     * @param array $options ('Error message').
+     * @since 0.3.0
+     */
+    private function ssn($field, $options) {
+        $arrField = explode('.', $field);
+        $data = (isset($this->data[$arrField[0]][$arrField[1]][$arrField[2]])) ? $this->data[$arrField[0]][$arrField[1]][$arrField[2]] : '';
+        $regex = \p12t\core\Locale::get('p12t.ssn');
+        if (!preg_match($regex, $data)) {
+            $this->setValidationError($field, $options[0]);
         }
     }
 
