@@ -18,8 +18,6 @@ namespace p12t\core;
  *
  * @since 0.1.0
  * @access public
- * @todo date validation
- * @todo time validation
  * @todo dateTime validation
  */
 class Model extends Object {
@@ -163,116 +161,31 @@ class Model extends Object {
     private function date($field, $options) {
         $arrField = explode('.', $field);
         $data = (isset($this->data[$arrField[0]][$arrField[1]][$arrField[2]])) ? $this->data[$arrField[0]][$arrField[1]][$arrField[2]] : '';
-        $formats = \p12t\core\Locale::get('p12t.date');
+        $regex = \p12t\core\Locale::get('p12t.date');
+        $format = \p12t\core\Locale::get('p12t.date_format');
         $ok = false;
-        foreach ($formats as $format) {
-            echo 'ok|';
+        $m = $d = $y = 0;
+        if (preg_match($regex, $data, $matches)) {
+            echo 'ok';
+            $date = str_replace(array(' ', '.', '/', '-'), '', $data);
             switch($format) {
-                case 'YYYYMMDD':
-                    $regex = '/^(?:(?:\d{4})([ -\/\.]?)(?:\d{2})\1(?:\d{2}))$/';
-                    if (preg_match($regex, $data)) {
-                        $date = str_replace(array(' ', '.', '\\', '-'), '', $data);
-                        $y = substr( $date, 0, 4 );
-                        $m = substr( $date, 4, 2 );
-                        $d = substr( $date, 6, 2 );
-                        if (checkdate($m, $d, $y)) {
-                            $ok = true;
-                            break 2;
-                        }
-                    }
-                    break;
-                case 'YYMMDD':
-                    $regex = '/^(?:(?:\d{2})([ -\/\.]?)(?:\d{2})\1(?:\d{2}))$/';
-                    if (preg_match($regex, $data)) {
-                        $date = str_replace(array(' ', '.', '\\', '-'), '', $data);
-                        $y = substr( $date, 0, 2 );
-                        $m = substr( $date, 2, 2 );
-                        $d = substr( $date, 4, 2 );
-                        if (checkdate($m, $d, $y)) {
-                            $ok = true;
-                            break 2;
-                        }
-                    }
-                    break;
-                case 'YYYYDDMM':
-                    $regex = '/^(?:(?:\d{4})([ -\/\.]?)(?:\d{2})\1(?:\d{2}))$/';
-                    if (preg_match($regex, $data)) {
-                        $date = str_replace(array(' ', '.', '\\', '-'), '', $data);
-                        $y = substr( $date, 0, 4 );
-                        $d = substr( $date, 4, 2 );
-                        $m = substr( $date, 6, 2 );
-                        if (checkdate($m, $d, $y)) {
-                            $ok = true;
-                            break 2;
-                        }
-                    }
-                    break;
-                case 'YYDDMM':
-                    $regex = '/^(?:(?:\d{2})([ -\/\.]?)(?:\d{2})\1(?:\d{2}))$/';
-                    if (preg_match($regex, $data)) {
-                        $date = str_replace(array(' ', '.', '\\', '-'), '', $data);
-                        $y = substr( $date, 0, 2 );
-                        $d = substr( $date, 2, 2 );
-                        $m = substr( $date, 4, 2 );
-                        if (checkdate($m, $d, $y)) {
-                            $ok = true;
-                            break 2;
-                        }
-                    }
-                    break;
-                case 'DDMMYYYY':
-                    $regex = '/^(?:(?:\d{2})([ -\/\.]?)(?:\d{2})\1(?:\d{4}))$/';
-                    if (preg_match($regex, $data)) {
-                        $date = str_replace(array(' ', '.', '\\', '-'), '', $data);
-                        $d = substr( $date, 0, 2 );
-                        $m = substr( $date, 2, 2 );
-                        $y = substr( $date, 4, 4 );
-                        if (checkdate($m, $d, $y)) {
-                            $ok = true;
-                            break 2;
-                        }
-                    }
-                    break;
-                case 'DDMMYY':
-                    $regex = '/^(?:(?:\d{2})([ -\/\.]?)(?:\d{2})\1(?:\d{2}))$/';
-                    if (preg_match($regex, $data)) {
-                        $date = str_replace(array(' ', '.', '\\', '-'), '', $data);
-                        $d = substr( $date, 0, 2 );
-                        $m = substr( $date, 2, 2 );
-                        $y = substr( $date, 4, 2 );
-                        if (checkdate($m, $d, $y)) {
-                            $ok = true;
-                            break 2;
-                        }
-                    }
-                    break;
-                case 'MMDDYYYY':
-                    $regex = '/^(?:(?:\d{2})([ -\/\.]?)(?:\d{2})\1(?:\d{4}))$/';
-                    if (preg_match($regex, $data)) {
-                        $date = str_replace(array(' ', '.', '\\', '-'), '', $data);
-                        $m = substr( $date, 0, 2 );
-                        $d = substr( $date, 2, 2 );
-                        $y = substr( $date, 4, 4 );
-                        if (checkdate($m, $d, $y)) {
-                            $ok = true;
-                            break 2;
-                        }
-                    }
-                    break;
-                case 'MMDDYY':
-                    $regex = '/^(?:(?:\d{2})([ -\/\.]?)(?:\d{2})\1(?:\d{2}))$/';
-                    if (preg_match($regex, $data)) {
-                        $date = str_replace(array(' ', '.', '\\', '-'), '', $data);
-                        $m = substr( $date, 0, 2 );
-                        $d = substr( $date, 2, 2 );
-                        $y = substr( $date, 4, 2 );
-                        if (checkdate($m, $d, $y)) {
-                            $ok = true;
-                            break 2;
-                        }
-                    }
-                    break;
+                case 'ymd':
+                    $y = $matches[1];
+                    $m = $matches[3];
+                    $d = $matches[4];
+                break;
+                case 'dmy':
+                    $y = $matches[4];
+                    $m = $matches[3];
+                    $d = $matches[1];
+                break;
+                case 'mdy':
+                    $y = $matches[4];
+                    $m = $matches[1];
+                    $d = $matches[3];
+                break;
             }
+            if (checkdate($m, $d, $y)) $ok = true;
         }
         if (!$ok) $this->setValidationError($field, $options[0]);
     }
