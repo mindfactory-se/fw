@@ -21,7 +21,7 @@ class BarModel extends AppModel {
 
     public $validation = array(
         'foo.bar.title' => array(
-            'zip' => array('Title could not be empty.'),
+            'date' => array('Title could not be empty.'),
         ),
         'foo.bar.text' => array(
             'notEmpty' => array('Text could not be empty.'),
