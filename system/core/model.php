@@ -158,15 +158,19 @@ class Model extends Object {
      * @param array $options ('Error message').
      * @since 0.3.0
      */
-    private function date($field, $options) {
+    private function date($field, $options, $data = null) {
         $arrField = explode('.', $field);
-        $data = (isset($this->data[$arrField[0]][$arrField[1]][$arrField[2]])) ? $this->data[$arrField[0]][$arrField[1]][$arrField[2]] : '';
+        if (\is_null($data)) {
+            $data = (isset($this->data[$arrField[0]][$arrField[1]][$arrField[2]])) ? $this->data[$arrField[0]][$arrField[1]][$arrField[2]] : '';
+            $return = false;
+        } else {
+            $return = true;
+        }
         $regex = \p12t\core\Locale::get('p12t.date');
         $format = \p12t\core\Locale::get('p12t.date_format');
         $ok = false;
         $m = $d = $y = 0;
         if (preg_match($regex, $data, $matches)) {
-            echo 'ok';
             $date = str_replace(array(' ', '.', '/', '-'), '', $data);
             switch($format) {
                 case 'ymd':
@@ -187,7 +191,40 @@ class Model extends Object {
             }
             if (checkdate($m, $d, $y)) $ok = true;
         }
-        if (!$ok) $this->setValidationError($field, $options[0]);
+        if (!$ok  && !$return) {
+            $this->setValidationError($field, $options[0]);
+        } elseif (!$ok && $return) {
+            return false;
+        } elseif ($return) {
+            return true;
+        }
+    }
+
+    /**
+     * Validates an datetime field.
+     *
+     * Checks if a field contains an valid date and time.
+     *
+     * @access private
+     * @param string $field Name of field to validate.
+     * @param array $options ('Error message').
+     * @since 0.3.0
+     */
+    private function datetime($field, $options, $data = null) {
+        $arrField = explode('.', $field);
+        if (\is_null($data)) {
+            $data = (isset($this->data[$arrField[0]][$arrField[1]][$arrField[2]])) ? $this->data[$arrField[0]][$arrField[1]][$arrField[2]] : '';
+            $return = false;
+        } else {
+            $return = true;
+        }
+        $field = \explode(' ', $data);
+        $count = count($field);
+        if ($count > 2) {
+            for ($i = 0; $i >= $count; $i++) {
+                
+            }
+        }
     }
 
     /**
@@ -558,10 +595,20 @@ class Model extends Object {
      */
     private function time($field, $options) {
         $arrField = explode('.', $field);
-        $data = (isset($this->data[$arrField[0]][$arrField[1]][$arrField[2]])) ? $this->data[$arrField[0]][$arrField[1]][$arrField[2]] : null;
+        if (\is_null($data)) {
+            $data = (isset($this->data[$arrField[0]][$arrField[1]][$arrField[2]])) ? $this->data[$arrField[0]][$arrField[1]][$arrField[2]] : '';
+            $return = false;
+        } else {
+            $return = true;
+        }
         $regex = \p12t\core\Locale::get('p12t.time_'.$options[0]);
-        if (!preg_match($regex, $data)) {
+        $result = preg_match($regex, $data);
+        if (!$result  && !$return) {
             $this->setValidationError($field, $options[1]);
+        } elseif (!$result && $return) {
+            return false;
+        } elseif ($return) {
+            return true;
         }
     }
     
